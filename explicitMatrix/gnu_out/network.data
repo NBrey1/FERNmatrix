@@ -1,0 +1,725 @@
+
+16 ISOTOPES IN NETWORK:
+
+Index  Isotope   A   Z   N  Abundance Y  MassFrac X  MassXS(MeV)
+    0       1n   1   0   1  0.00000e+00    0.000000      8.07100
+    1       1H   1   1   0  7.08591e-01    0.708591      7.28900
+    2      4He   4   2   2  6.90017e-02    0.276007      2.42500
+    3      12C  12   6   6  2.53424e-04    0.003041      0.00000
+    4      13C  13   6   7  2.81800e-06    0.000037      3.12500
+    5      13N  13   7   6  0.00000e+00    0.000000      5.34600
+    6      14N  14   7   7  7.88598e-05    0.001104      2.86300
+    7      15N  15   7   8  2.91684e-07    0.000004      0.10100
+    8      15O  15   8   7  0.00000e+00    0.000000      2.85500
+    9      16O  16   8   8  6.01610e-04    0.009626     -4.73700
+   10      17O  17   8   9  2.91684e-07    0.000005     -0.80900
+   11      18O  18   8  10  1.20984e-06    0.000022     -0.78200
+   12     17Fl  17   9   8  0.00000e+00    0.000000      1.95200
+   13     18Fl  18   9   9  0.00000e+00    0.000000      0.87300
+   14     19Fl  19   9  10  0.00000e+00    0.000000     -1.48700
+   15     20Ne  20  10  10  7.81832e-05    0.001564     -7.04200
+
+SUMMARY: 134 REACTIONS
+
+0 n-->p+e+nubar reacClass=1 #react=1 #prod=1 isEC=0 isReverse=0 Q=0.7823 prefac=1.0000 RGsymb:a<->b
+1 he4+he4+he4-->c12 reacClass=8 #react=3 #prod=1 isEC=0 isReverse=0 Q=7.2750 prefac=0.1667 RGsymb:a+b+c<->d
+2 he4+he4+he4-->c12 reacClass=8 #react=3 #prod=1 isEC=0 isReverse=0 Q=7.2750 prefac=0.1667 RGsymb:a+b+c<->d
+3 c12-->he4+he4+he4 reacClass=3 #react=1 #prod=3 isEC=0 isReverse=0 Q=-7.2750 prefac=1.0000 RGsymb:a+b+c<->d
+4 c12-->he4+he4+he4 reacClass=3 #react=1 #prod=3 isEC=0 isReverse=0 Q=-7.2750 prefac=1.0000 RGsymb:a+b+c<->d
+5 n+c12-->c13 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.9464 prefac=1.0000 RGsymb:a+b<->c
+6 c13-->n+c12 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.9464 prefac=1.0000 RGsymb:a+b<->c
+7 p+c12-->n13 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=1.9440 prefac=1.0000 RGsymb:a+b<->c
+8 p+c12-->n13 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=1.9440 prefac=1.0000 RGsymb:a+b<->c
+9 n13-->p+c12 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-1.9440 prefac=1.0000 RGsymb:a+b<->c
+10 n13-->p+c12 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-1.9440 prefac=1.0000 RGsymb:a+b<->c
+11 he4+c12-->o16 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.1620 prefac=1.0000 RGsymb:a+b<->c
+12 he4+c12-->o16 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.1620 prefac=1.0000 RGsymb:a+b<->c
+13 o16-->he4+c12 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.1620 prefac=1.0000 RGsymb:a+b<->c
+14 o16-->he4+c12 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.1620 prefac=1.0000 RGsymb:a+b<->c
+15 he4+c12-->n+o15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-8.5020 prefac=1.0000 RGsymb:a+b<->c+d
+16 n+o15-->he4+c12 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=8.5020 prefac=1.0000 RGsymb:a+b<->c+d
+17 he4+c12-->p+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-4.9660 prefac=1.0000 RGsymb:a+b<->c+d
+18 he4+c12-->p+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-4.9660 prefac=1.0000 RGsymb:a+b<->c+d
+19 p+n15-->he4+c12 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.9660 prefac=1.0000 RGsymb:a+b<->c+d
+20 p+n15-->he4+c12 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.9660 prefac=1.0000 RGsymb:a+b<->c+d
+21 c12+c12-->he4+ne20 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.6210 prefac=0.5000 RGsymb:a+b<->c+d
+22 he4+ne20-->c12+c12 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=1 Q=-4.6210 prefac=1.0000 RGsymb:a+b<->c+d
+23 p+c13-->n14 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.5510 prefac=1.0000 RGsymb:a+b<->c
+24 p+c13-->n14 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.5510 prefac=1.0000 RGsymb:a+b<->c
+25 n14-->p+c13 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.5510 prefac=1.0000 RGsymb:a+b<->c
+26 n14-->p+c13 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.5510 prefac=1.0000 RGsymb:a+b<->c
+27 p+c13-->n+n13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-3.0030 prefac=1.0000 RGsymb:a+b<->c+d
+28 n+n13-->p+c13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.0030 prefac=1.0000 RGsymb:a+b<->c+d
+29 he4+c13-->n+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+30 he4+c13-->n+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+31 he4+c13-->n+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+32 n+o16-->he4+c13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+33 n+o16-->he4+c13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+34 n+o16-->he4+c13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-2.2160 prefac=1.0000 RGsymb:a+b<->c+d
+35 n13-->c13+e++nu reacClass=1 #react=1 #prod=1 isEC=0 isReverse=0 Q=2.2210 prefac=1.0000 RGsymb:a<->b
+36 n+n13-->n14 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=10.5544 prefac=1.0000 RGsymb:a+b<->c
+37 n+n13-->n14 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=10.5544 prefac=1.0000 RGsymb:a+b<->c
+38 n14-->n+n13 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-10.5544 prefac=1.0000 RGsymb:a+b<->c
+39 n14-->n+n13 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-10.5544 prefac=1.0000 RGsymb:a+b<->c
+40 he4+n13-->p+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=5.2180 prefac=1.0000 RGsymb:a+b<->c+d
+41 p+o16-->he4+n13 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-5.2180 prefac=1.0000 RGsymb:a+b<->c+d
+42 n+n14-->n15 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=10.8324 prefac=1.0000 RGsymb:a+b<->c
+43 n15-->n+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-10.8324 prefac=1.0000 RGsymb:a+b<->c
+44 p+n14-->o15 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.2970 prefac=1.0000 RGsymb:a+b<->c
+45 p+n14-->o15 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.2970 prefac=1.0000 RGsymb:a+b<->c
+46 o15-->p+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.2970 prefac=1.0000 RGsymb:a+b<->c
+47 o15-->p+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.2970 prefac=1.0000 RGsymb:a+b<->c
+48 he4+n14-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.4150 prefac=1.0000 RGsymb:a+b<->c
+49 he4+n14-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.4150 prefac=1.0000 RGsymb:a+b<->c
+50 he4+n14-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.4150 prefac=1.0000 RGsymb:a+b<->c
+51 f18-->he4+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.4150 prefac=1.0000 RGsymb:a+b<->c
+52 f18-->he4+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.4150 prefac=1.0000 RGsymb:a+b<->c
+53 f18-->he4+n14 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.4150 prefac=1.0000 RGsymb:a+b<->c
+54 he4+n14-->n+f17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-4.7355 prefac=1.0000 RGsymb:a+b<->c+d
+55 he4+n14-->n+f17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-4.7350 prefac=1.0000 RGsymb:a+b<->c+d
+56 n+f17-->he4+n14 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.7355 prefac=1.0000 RGsymb:a+b<->c+d
+57 n+f17-->he4+n14 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.7350 prefac=1.0000 RGsymb:a+b<->c+d
+58 he4+n14-->p+o17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+59 he4+n14-->p+o17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+60 he4+n14-->p+o17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+61 p+o17-->he4+n14 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+62 p+o17-->he4+n14 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+63 p+o17-->he4+n14 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=1.1910 prefac=1.0000 RGsymb:a+b<->c+d
+64 p+n15-->o16 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=12.1280 prefac=1.0000 RGsymb:a+b<->c
+65 p+n15-->o16 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=12.1280 prefac=1.0000 RGsymb:a+b<->c
+66 o16-->p+n15 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-12.1280 prefac=1.0000 RGsymb:a+b<->c
+67 o16-->p+n15 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-12.1280 prefac=1.0000 RGsymb:a+b<->c
+68 he4+n15-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.0140 prefac=1.0000 RGsymb:a+b<->c
+69 he4+n15-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.0140 prefac=1.0000 RGsymb:a+b<->c
+70 he4+n15-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.0140 prefac=1.0000 RGsymb:a+b<->c
+71 f19-->he4+n15 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.0140 prefac=1.0000 RGsymb:a+b<->c
+72 f19-->he4+n15 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.0140 prefac=1.0000 RGsymb:a+b<->c
+73 f19-->he4+n15 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.0140 prefac=1.0000 RGsymb:a+b<->c
+74 p+n15-->n+o15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-3.5363 prefac=1.0000 RGsymb:a+b<->c+d
+75 n+o15-->p+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.5363 prefac=1.0000 RGsymb:a+b<->c+d
+76 he4+n15-->n+f18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-6.4174 prefac=1.0000 RGsymb:a+b<->c+d
+77 n+f18-->he4+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=6.4174 prefac=1.0000 RGsymb:a+b<->c+d
+78 he4+n15-->p+o18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+79 he4+n15-->p+o18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+80 he4+n15-->p+o18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+81 p+o18-->he4+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+82 p+o18-->he4+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+83 p+o18-->he4+n15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.9800 prefac=1.0000 RGsymb:a+b<->c+d
+84 o15-->n15+e++nu reacClass=1 #react=1 #prod=1 isEC=0 isReverse=0 Q=2.7540 prefac=1.0000 RGsymb:a<->b
+85 he4+o15-->p+f18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=1 Q=-2.8811 prefac=1.0000 RGsymb:a+b<->c+d
+86 he4+o15-->p+f18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=1 Q=-2.8811 prefac=1.0000 RGsymb:a+b<->c+d
+87 p+f18-->he4+o15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.8811 prefac=1.0000 RGsymb:a+b<->c+d
+88 p+f18-->he4+o15 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.8811 prefac=1.0000 RGsymb:a+b<->c+d
+89 n+o16-->o17 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.1434 prefac=1.0000 RGsymb:a+b<->c
+90 o17-->n+o16 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.1434 prefac=1.0000 RGsymb:a+b<->c
+91 p+o16-->f17 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=0.6000 prefac=1.0000 RGsymb:a+b<->c
+92 f17-->p+o16 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-0.6000 prefac=1.0000 RGsymb:a+b<->c
+93 he4+o16-->ne20 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.7340 prefac=1.0000 RGsymb:a+b<->c
+94 he4+o16-->ne20 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=4.7340 prefac=1.0000 RGsymb:a+b<->c
+95 ne20-->he4+o16 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.7340 prefac=1.0000 RGsymb:a+b<->c
+96 ne20-->he4+o16 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-4.7340 prefac=1.0000 RGsymb:a+b<->c
+97 he4+o16-->p+f19 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-8.1140 prefac=1.0000 RGsymb:a+b<->c+d
+98 he4+o16-->p+f19 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-8.1140 prefac=1.0000 RGsymb:a+b<->c+d
+99 p+f19-->he4+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=8.1140 prefac=1.0000 RGsymb:a+b<->c+d
+100 p+f19-->he4+o16 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=8.1140 prefac=1.0000 RGsymb:a+b<->c+d
+101 n+o17-->o18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=8.0444 prefac=1.0000 RGsymb:a+b<->c
+102 n+o17-->o18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=8.0444 prefac=1.0000 RGsymb:a+b<->c
+103 o18-->n+o17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-8.0444 prefac=1.0000 RGsymb:a+b<->c
+104 o18-->n+o17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-8.0444 prefac=1.0000 RGsymb:a+b<->c
+105 p+o17-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=5.6070 prefac=1.0000 RGsymb:a+b<->c
+106 p+o17-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=5.6070 prefac=1.0000 RGsymb:a+b<->c
+107 p+o17-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=5.6070 prefac=1.0000 RGsymb:a+b<->c
+108 f18-->p+o17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-5.6070 prefac=1.0000 RGsymb:a+b<->c
+109 f18-->p+o17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-5.6070 prefac=1.0000 RGsymb:a+b<->c
+110 f18-->p+o17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-5.6070 prefac=1.0000 RGsymb:a+b<->c
+111 p+o17-->n+f17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=1 Q=-3.5433 prefac=1.0000 RGsymb:a+b<->c+d
+112 n+f17-->p+o17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=3.5433 prefac=1.0000 RGsymb:a+b<->c+d
+113 p+o18-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.9940 prefac=1.0000 RGsymb:a+b<->c
+114 p+o18-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.9940 prefac=1.0000 RGsymb:a+b<->c
+115 p+o18-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=7.9940 prefac=1.0000 RGsymb:a+b<->c
+116 f19-->p+o18 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.9940 prefac=1.0000 RGsymb:a+b<->c
+117 f19-->p+o18 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.9940 prefac=1.0000 RGsymb:a+b<->c
+118 f19-->p+o18 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-7.9940 prefac=1.0000 RGsymb:a+b<->c
+119 p+o18-->n+f18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=1 Q=-2.4373 prefac=1.0000 RGsymb:a+b<->c+d
+120 n+f18-->p+o18 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=2.4373 prefac=1.0000 RGsymb:a+b<->c+d
+121 f17-->o17+e++nu reacClass=1 #react=1 #prod=1 isEC=0 isReverse=0 Q=2.7610 prefac=1.0000 RGsymb:a<->b
+122 n+f17-->f18 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=9.1504 prefac=1.0000 RGsymb:a+b<->c
+123 f18-->n+f17 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-9.1504 prefac=1.0000 RGsymb:a+b<->c
+124 he4+f17-->p+ne20 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=4.1340 prefac=1.0000 RGsymb:a+b<->c+d
+125 p+ne20-->he4+f17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-4.1340 prefac=1.0000 RGsymb:a+b<->c+d
+126 f18-->o18+e++nu reacClass=1 #react=1 #prod=1 isEC=0 isReverse=0 Q=1.6550 prefac=1.0000 RGsymb:a<->b
+127 n+f18-->f19 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=10.4314 prefac=1.0000 RGsymb:a+b<->c
+128 f19-->n+f18 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-10.4314 prefac=1.0000 RGsymb:a+b<->c
+129 p+f19-->ne20 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=12.8480 prefac=1.0000 RGsymb:a+b<->c
+130 p+f19-->ne20 reacClass=4 #react=2 #prod=1 isEC=0 isReverse=0 Q=12.8480 prefac=1.0000 RGsymb:a+b<->c
+131 ne20-->p+f19 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-12.8480 prefac=1.0000 RGsymb:a+b<->c
+132 ne20-->p+f19 reacClass=2 #react=1 #prod=2 isEC=0 isReverse=1 Q=-12.8480 prefac=1.0000 RGsymb:a+b<->c
+133 n+ne20-->he4+o17 reacClass=5 #react=2 #prod=2 isEC=0 isReverse=0 Q=-0.5900 prefac=1.0000 RGsymb:a+b<->c+d
+
+
+PARTIAL EQUILIBRIUM REACTION GROUPS
+
+Reaction Group 0:
+n-->p+e+nubar reacIndex=0 RGindex=0 RGclass=1 RGreacIndex=0 isForward=1 RG:a<->b
+
+Reaction Group 1:
+he4+he4+he4-->c12 reacIndex=1 RGindex=0 RGclass=3 RGreacIndex=0 isForward=1 RG:a+b+c<->d
+he4+he4+he4-->c12 reacIndex=2 RGindex=1 RGclass=3 RGreacIndex=1 isForward=1 RG:a+b+c<->d
+c12-->he4+he4+he4 reacIndex=3 RGindex=2 RGclass=3 RGreacIndex=2 isForward=0 RG:a+b+c<->d
+c12-->he4+he4+he4 reacIndex=4 RGindex=3 RGclass=3 RGreacIndex=3 isForward=0 RG:a+b+c<->d
+
+Reaction Group 2:
+n+c12-->c13 reacIndex=5 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+c13-->n+c12 reacIndex=6 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 3:
+p+c12-->n13 reacIndex=7 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+c12-->n13 reacIndex=8 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+n13-->p+c12 reacIndex=9 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+n13-->p+c12 reacIndex=10 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 4:
+he4+c12-->o16 reacIndex=11 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+he4+c12-->o16 reacIndex=12 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+o16-->he4+c12 reacIndex=13 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+o16-->he4+c12 reacIndex=14 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 5:
+he4+c12-->n+o15 reacIndex=15 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+o15-->he4+c12 reacIndex=16 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 6:
+he4+c12-->p+n15 reacIndex=17 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+c12-->p+n15 reacIndex=18 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+p+n15-->he4+c12 reacIndex=19 RGindex=2 RGclass=4 RGreacIndex=2 isForward=0 RG:a+b<->c+d
+p+n15-->he4+c12 reacIndex=20 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+
+Reaction Group 7:
+c12+c12-->he4+ne20 reacIndex=21 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+ne20-->c12+c12 reacIndex=22 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 8:
+p+c13-->n14 reacIndex=23 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+c13-->n14 reacIndex=24 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+n14-->p+c13 reacIndex=25 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+n14-->p+c13 reacIndex=26 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 9:
+p+c13-->n+n13 reacIndex=27 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+n13-->p+c13 reacIndex=28 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 10:
+he4+c13-->n+o16 reacIndex=29 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+c13-->n+o16 reacIndex=30 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+he4+c13-->n+o16 reacIndex=31 RGindex=2 RGclass=4 RGreacIndex=2 isForward=1 RG:a+b<->c+d
+n+o16-->he4+c13 reacIndex=32 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+n+o16-->he4+c13 reacIndex=33 RGindex=4 RGclass=4 RGreacIndex=4 isForward=0 RG:a+b<->c+d
+n+o16-->he4+c13 reacIndex=34 RGindex=5 RGclass=4 RGreacIndex=5 isForward=0 RG:a+b<->c+d
+
+Reaction Group 11:
+n13-->c13+e++nu reacIndex=35 RGindex=0 RGclass=1 RGreacIndex=0 isForward=1 RG:a<->b
+
+Reaction Group 12:
+n+n13-->n14 reacIndex=36 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+n+n13-->n14 reacIndex=37 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+n14-->n+n13 reacIndex=38 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+n14-->n+n13 reacIndex=39 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 13:
+he4+n13-->p+o16 reacIndex=40 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+p+o16-->he4+n13 reacIndex=41 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 14:
+n+n14-->n15 reacIndex=42 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+n15-->n+n14 reacIndex=43 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 15:
+p+n14-->o15 reacIndex=44 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+n14-->o15 reacIndex=45 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+o15-->p+n14 reacIndex=46 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+o15-->p+n14 reacIndex=47 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 16:
+he4+n14-->f18 reacIndex=48 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+he4+n14-->f18 reacIndex=49 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+he4+n14-->f18 reacIndex=50 RGindex=2 RGclass=2 RGreacIndex=2 isForward=1 RG:a+b<->c
+f18-->he4+n14 reacIndex=51 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+f18-->he4+n14 reacIndex=52 RGindex=4 RGclass=2 RGreacIndex=4 isForward=0 RG:a+b<->c
+f18-->he4+n14 reacIndex=53 RGindex=5 RGclass=2 RGreacIndex=5 isForward=0 RG:a+b<->c
+
+Reaction Group 17:
+he4+n14-->n+f17 reacIndex=54 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+n14-->n+f17 reacIndex=55 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+n+f17-->he4+n14 reacIndex=56 RGindex=2 RGclass=4 RGreacIndex=2 isForward=0 RG:a+b<->c+d
+n+f17-->he4+n14 reacIndex=57 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+
+Reaction Group 18:
+he4+n14-->p+o17 reacIndex=58 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+n14-->p+o17 reacIndex=59 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+he4+n14-->p+o17 reacIndex=60 RGindex=2 RGclass=4 RGreacIndex=2 isForward=1 RG:a+b<->c+d
+p+o17-->he4+n14 reacIndex=61 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+p+o17-->he4+n14 reacIndex=62 RGindex=4 RGclass=4 RGreacIndex=4 isForward=0 RG:a+b<->c+d
+p+o17-->he4+n14 reacIndex=63 RGindex=5 RGclass=4 RGreacIndex=5 isForward=0 RG:a+b<->c+d
+
+Reaction Group 19:
+p+n15-->o16 reacIndex=64 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+n15-->o16 reacIndex=65 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+o16-->p+n15 reacIndex=66 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+o16-->p+n15 reacIndex=67 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 20:
+he4+n15-->f19 reacIndex=68 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+he4+n15-->f19 reacIndex=69 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+he4+n15-->f19 reacIndex=70 RGindex=2 RGclass=2 RGreacIndex=2 isForward=1 RG:a+b<->c
+f19-->he4+n15 reacIndex=71 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+f19-->he4+n15 reacIndex=72 RGindex=4 RGclass=2 RGreacIndex=4 isForward=0 RG:a+b<->c
+f19-->he4+n15 reacIndex=73 RGindex=5 RGclass=2 RGreacIndex=5 isForward=0 RG:a+b<->c
+
+Reaction Group 21:
+p+n15-->n+o15 reacIndex=74 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+o15-->p+n15 reacIndex=75 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 22:
+he4+n15-->n+f18 reacIndex=76 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+f18-->he4+n15 reacIndex=77 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 23:
+he4+n15-->p+o18 reacIndex=78 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+n15-->p+o18 reacIndex=79 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+he4+n15-->p+o18 reacIndex=80 RGindex=2 RGclass=4 RGreacIndex=2 isForward=1 RG:a+b<->c+d
+p+o18-->he4+n15 reacIndex=81 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+p+o18-->he4+n15 reacIndex=82 RGindex=4 RGclass=4 RGreacIndex=4 isForward=0 RG:a+b<->c+d
+p+o18-->he4+n15 reacIndex=83 RGindex=5 RGclass=4 RGreacIndex=5 isForward=0 RG:a+b<->c+d
+
+Reaction Group 24:
+o15-->n15+e++nu reacIndex=84 RGindex=0 RGclass=1 RGreacIndex=0 isForward=1 RG:a<->b
+
+Reaction Group 25:
+he4+o15-->p+f18 reacIndex=85 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+o15-->p+f18 reacIndex=86 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+p+f18-->he4+o15 reacIndex=87 RGindex=2 RGclass=4 RGreacIndex=2 isForward=0 RG:a+b<->c+d
+p+f18-->he4+o15 reacIndex=88 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+
+Reaction Group 26:
+n+o16-->o17 reacIndex=89 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+o17-->n+o16 reacIndex=90 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 27:
+p+o16-->f17 reacIndex=91 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+f17-->p+o16 reacIndex=92 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 28:
+he4+o16-->ne20 reacIndex=93 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+he4+o16-->ne20 reacIndex=94 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+ne20-->he4+o16 reacIndex=95 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+ne20-->he4+o16 reacIndex=96 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 29:
+he4+o16-->p+f19 reacIndex=97 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+he4+o16-->p+f19 reacIndex=98 RGindex=1 RGclass=4 RGreacIndex=1 isForward=1 RG:a+b<->c+d
+p+f19-->he4+o16 reacIndex=99 RGindex=2 RGclass=4 RGreacIndex=2 isForward=0 RG:a+b<->c+d
+p+f19-->he4+o16 reacIndex=100 RGindex=3 RGclass=4 RGreacIndex=3 isForward=0 RG:a+b<->c+d
+
+Reaction Group 30:
+n+o17-->o18 reacIndex=101 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+n+o17-->o18 reacIndex=102 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+o18-->n+o17 reacIndex=103 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+o18-->n+o17 reacIndex=104 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 31:
+p+o17-->f18 reacIndex=105 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+o17-->f18 reacIndex=106 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+p+o17-->f18 reacIndex=107 RGindex=2 RGclass=2 RGreacIndex=2 isForward=1 RG:a+b<->c
+f18-->p+o17 reacIndex=108 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+f18-->p+o17 reacIndex=109 RGindex=4 RGclass=2 RGreacIndex=4 isForward=0 RG:a+b<->c
+f18-->p+o17 reacIndex=110 RGindex=5 RGclass=2 RGreacIndex=5 isForward=0 RG:a+b<->c
+
+Reaction Group 32:
+p+o17-->n+f17 reacIndex=111 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+f17-->p+o17 reacIndex=112 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 33:
+p+o18-->f19 reacIndex=113 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+o18-->f19 reacIndex=114 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+p+o18-->f19 reacIndex=115 RGindex=2 RGclass=2 RGreacIndex=2 isForward=1 RG:a+b<->c
+f19-->p+o18 reacIndex=116 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+f19-->p+o18 reacIndex=117 RGindex=4 RGclass=2 RGreacIndex=4 isForward=0 RG:a+b<->c
+f19-->p+o18 reacIndex=118 RGindex=5 RGclass=2 RGreacIndex=5 isForward=0 RG:a+b<->c
+
+Reaction Group 34:
+p+o18-->n+f18 reacIndex=119 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+n+f18-->p+o18 reacIndex=120 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 35:
+f17-->o17+e++nu reacIndex=121 RGindex=0 RGclass=1 RGreacIndex=0 isForward=1 RG:a<->b
+
+Reaction Group 36:
+n+f17-->f18 reacIndex=122 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+f18-->n+f17 reacIndex=123 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 37:
+he4+f17-->p+ne20 reacIndex=124 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+p+ne20-->he4+f17 reacIndex=125 RGindex=1 RGclass=4 RGreacIndex=1 isForward=0 RG:a+b<->c+d
+
+Reaction Group 38:
+f18-->o18+e++nu reacIndex=126 RGindex=0 RGclass=1 RGreacIndex=0 isForward=1 RG:a<->b
+
+Reaction Group 39:
+n+f18-->f19 reacIndex=127 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+f19-->n+f18 reacIndex=128 RGindex=1 RGclass=2 RGreacIndex=1 isForward=0 RG:a+b<->c
+
+Reaction Group 40:
+p+f19-->ne20 reacIndex=129 RGindex=0 RGclass=2 RGreacIndex=0 isForward=1 RG:a+b<->c
+p+f19-->ne20 reacIndex=130 RGindex=1 RGclass=2 RGreacIndex=1 isForward=1 RG:a+b<->c
+ne20-->p+f19 reacIndex=131 RGindex=2 RGclass=2 RGreacIndex=2 isForward=0 RG:a+b<->c
+ne20-->p+f19 reacIndex=132 RGindex=3 RGclass=2 RGreacIndex=3 isForward=0 RG:a+b<->c
+
+Reaction Group 41:
+n+ne20-->he4+o17 reacIndex=133 RGindex=0 RGclass=4 RGreacIndex=0 isForward=1 RG:a+b<->c+d
+
+
+PARTIAL EQUILIBRIUM REACTION GROUPS (t=1.0000e+18, fracRGequil= 0.00)
+
+REACTION GROUP 0: isEquil=FALSE netflux=1.146e-45 thisDevious/maxDevious=0.000
+    n-->p+e+nubar flux=1.146e-45 flux_true=1.146e-45
+    Sum flux_true=1.146e-45
+Isotope Equil Ratios:  1n(6.667e+25)   1H(1.857e+01) 
+Isotope Mass Fractions:  1n(0.000e+00)   1H(8.530e-09) 
+
+REACTION GROUP 1: isEquil=FALSE netflux=1.216e-56 thisDevious/maxDevious=12635131188207343183710912512.000
+    he4+he4+he4-->c12 flux=1.945e-98 flux_true=1.945e-98
+    he4+he4+he4-->c12 flux=1.216e-56 flux_true=1.216e-56
+    c12-->he4+he4+he4 flux=0.000e+00 flux_true=0.000e+00
+    c12-->he4+he4+he4 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.216e-56
+Isotope Equil Ratios: 4He(6.667e+25)  4He(6.667e+25)  4He(6.667e+25)  12C(6.667e+01) 
+Isotope Mass Fractions: 4He(0.000e+00)  4He(0.000e+00)  4He(0.000e+00)  12C(2.052e-02) 
+
+REACTION GROUP 2: isEquil=FALSE netflux=3.623e-42 thisDevious/maxDevious=0.000
+    n+c12-->c13 flux=3.623e-42 flux_true=3.623e-42
+    c13-->n+c12 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.623e-42
+Isotope Equil Ratios:  1n(6.667e+25)  12C(4.831e-05)  13C(1.342e-02) 
+Isotope Mass Fractions:  1n(0.000e+00)  12C(4.923e-07)  13C(1.314e-07) 
+
+REACTION GROUP 3: isEquil=FALSE netflux=3.966e-26 thisDevious/maxDevious=5315393442402871717563085271072768.000
+    p+c12-->n13 flux=3.966e-26 flux_true=3.966e-26
+    p+c12-->n13 flux=2.363e-112 flux_true=2.363e-112
+    n13-->p+c12 flux=0.000e+00 flux_true=0.000e+00
+    n13-->p+c12 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.966e-26
+Isotope Equil Ratios:  1H(6.667e+25)  12C(9.645e-02)  13N(6.667e+01) 
+Isotope Mass Fractions:  1H(0.000e+00)  12C(4.916e-07)  13N(6.562e-10) 
+
+REACTION GROUP 4: isEquil=FALSE netflux=3.605e-45 thisDevious/maxDevious=121124122323410808209408.000
+    he4+c12-->o16 flux=3.605e-45 flux_true=3.605e-45
+    he4+c12-->o16 flux=0.000e+00 flux_true=0.000e+00
+    o16-->he4+c12 flux=0.000e+00 flux_true=0.000e+00
+    o16-->he4+c12 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.605e-45
+Isotope Equil Ratios: 4He(1.600e-03)  12C(6.667e+25)  16O(5.971e+00) 
+Isotope Mass Fractions: 4He(6.156e-02)  12C(0.000e+00)  16O(4.122e-06) 
+
+REACTION GROUP 5: isEquil=FALSE netflux=-7.245e-57 thisDevious/maxDevious=  nan
+    he4+c12-->n+o15 flux=0.000e+00 flux_true=0.000e+00
+    n+o15-->he4+c12 flux=7.245e-57 flux_true=7.245e-57
+    Sum flux_true=-7.245e-57
+Isotope Equil Ratios: 4He(1.621e-07)  12C(4.831e-05)   1n(6.667e+25)  15O(6.667e+25) 
+Isotope Mass Fractions: 4He(6.156e-02)  12C(4.923e-07)   1n(-2.776e-17)  15O(-1.850e-18) 
+
+REACTION GROUP 6: isEquil=FALSE netflux=-3.995e-26 thisDevious/maxDevious=  nan
+    he4+c12-->p+n15 flux=0.000e+00 flux_true=0.000e+00
+    he4+c12-->p+n15 flux=0.000e+00 flux_true=0.000e+00
+    p+n15-->he4+c12 flux=3.995e-26 flux_true=3.995e-26
+    p+n15-->he4+c12 flux=1.410e-83 flux_true=1.410e-83
+    Sum flux_true=-3.995e-26
+Isotope Equil Ratios: 4He(2.208e-06)  12C(9.858e-02)   1H(6.667e+25)  15N(2.739e+01) 
+Isotope Mass Fractions: 4He(6.156e-02)  12C(4.930e-07)   1H(-2.228e-10)  15N(1.365e-09) 
+
+REACTION GROUP 7: isEquil=FALSE netflux=2.794e-117 thisDevious/maxDevious=9065293719030990848.000
+    c12+c12-->he4+ne20 flux=2.794e-117 flux_true=2.794e-117
+    he4+ne20-->c12+c12 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=2.794e-117
+Isotope Equil Ratios: 12C(6.667e+25)  12C(6.667e+25)  4He(1.599e-03) 20Ne(4.684e+00) 
+Isotope Mass Fractions: 12C(0.000e+00)  12C(0.000e+00)  4He(6.156e-02) 20Ne(4.204e-06) 
+
+REACTION GROUP 8: isEquil=FALSE netflux=3.949e-26 thisDevious/maxDevious=62946253347488.875
+    p+c13-->n14 flux=3.949e-26 flux_true=3.949e-26
+    p+c13-->n14 flux=6.170e-129 flux_true=6.170e-129
+    n14-->p+c13 flux=0.000e+00 flux_true=0.000e+00
+    n14-->p+c13 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.949e-26
+Isotope Equil Ratios:  1H(6.667e+25)  13C(3.212e-01)  14N(6.814e-04) 
+Isotope Mass Fractions:  1H(0.000e+00)  13C(1.307e-07)  14N(5.961e-05) 
+
+REACTION GROUP 9: isEquil=FALSE netflux=-1.676e-55 thisDevious/maxDevious=  nan
+    p+c13-->n+n13 flux=0.000e+00 flux_true=0.000e+00
+    n+n13-->p+c13 flux=1.676e-55 flux_true=1.676e-55
+    Sum flux_true=-1.676e-55
+Isotope Equil Ratios:  1H(1.857e+01)  13C(1.342e-02)   1n(6.667e+25)  13N(2.520e+01) 
+Isotope Mass Fractions:  1H(8.530e-09)  13C(1.314e-07)   1n(-2.316e-23)  13N(1.909e-24) 
+
+REACTION GROUP 10: isEquil=FALSE netflux=1.768e-40 thisDevious/maxDevious=34429833220839471323943736578862202217888629485505113366548447232.000
+    he4+c13-->n+o16 flux=1.768e-40 flux_true=1.768e-40
+    he4+c13-->n+o16 flux=1.065e-204 flux_true=1.065e-204
+    he4+c13-->n+o16 flux=0.000e+00 flux_true=0.000e+00
+    n+o16-->he4+c13 flux=0.000e+00 flux_true=0.000e+00
+    n+o16-->he4+c13 flux=0.000e+00 flux_true=0.000e+00
+    n+o16-->he4+c13 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.768e-40
+Isotope Equil Ratios: 4He(4.625e-04)  13C(6.667e+25)   1n(6.667e+01)  16O(1.844e+00) 
+Isotope Mass Fractions: 4He(6.156e-02)  13C(0.000e+00)   1n(1.708e-06)  16O(3.860e-06) 
+
+REACTION GROUP 11: isEquil=FALSE netflux=5.492e-26 thisDevious/maxDevious=100140001.440
+    n13-->c13+e++nu flux=5.492e-26 flux_true=5.492e-26
+    Sum flux_true=5.492e-26
+Isotope Equil Ratios: 13N(6.667e+25)  13C(1.342e-02) 
+Isotope Mass Fractions: 13N(0.000e+00)  13C(1.314e-07) 
+
+REACTION GROUP 12: isEquil=FALSE netflux=1.088e-57 thisDevious/maxDevious=0.000
+    n+n13-->n14 flux=1.088e-57 flux_true=1.088e-57
+    n+n13-->n14 flux=1.067e-127 flux_true=1.067e-127
+    n14-->n+n13 flux=0.000e+00 flux_true=0.000e+00
+    n14-->n+n13 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.088e-57
+Isotope Equil Ratios:  1n(6.667e+25)  13N(1.852e+01)  14N(2.244e-08) 
+Isotope Mass Fractions:  1n(0.000e+00)  13N(3.642e-24)  14N(5.961e-05) 
+
+REACTION GROUP 13: isEquil=FALSE netflux=5.667e-64 thisDevious/maxDevious=113937118329904.453
+    he4+n13-->p+o16 flux=5.667e-64 flux_true=5.667e-64
+    p+o16-->he4+n13 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=5.667e-64
+Isotope Equil Ratios: 4He(1.621e-07)  13N(6.667e+01)   1H(1.857e+01)  16O(9.752e-08) 
+Isotope Mass Fractions: 4He(6.156e-02)  13N(2.135e-18)   1H(8.530e-09)  16O(3.753e-06) 
+
+REACTION GROUP 14: isEquil=FALSE netflux=1.731e-40 thisDevious/maxDevious=0.000
+    n+n14-->n15 flux=1.731e-40 flux_true=1.731e-40
+    n15-->n+n14 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.731e-40
+Isotope Equil Ratios:  1n(6.667e+25)  14N(2.244e-08)  15N(7.724e-01) 
+Isotope Mass Fractions:  1n(0.000e+00)  14N(5.961e-05)  15N(1.949e-09) 
+
+REACTION GROUP 15: isEquil=FALSE netflux=3.949e-26 thisDevious/maxDevious=3700885994356313316797089890393128960.000
+    p+n14-->o15 flux=3.949e-26 flux_true=3.949e-26
+    p+n14-->o15 flux=3.914e-71 flux_true=3.914e-71
+    o15-->p+n14 flux=0.000e+00 flux_true=0.000e+00
+    o15-->p+n14 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.949e-26
+Isotope Equil Ratios:  1H(6.667e+25)  14N(6.814e-04)  15O(6.667e+01) 
+Isotope Mass Fractions:  1H(0.000e+00)  14N(5.961e-05)  15O(5.687e-10) 
+
+REACTION GROUP 16: isEquil=FALSE netflux=1.259e-49 thisDevious/maxDevious=2951471124302850371571199489536553867724980224.000
+    he4+n14-->f18 flux=1.259e-49 flux_true=1.259e-49
+    he4+n14-->f18 flux=5.990e-71 flux_true=5.990e-71
+    he4+n14-->f18 flux=3.818e-97 flux_true=3.818e-97
+    f18-->he4+n14 flux=0.000e+00 flux_true=0.000e+00
+    f18-->he4+n14 flux=0.000e+00 flux_true=0.000e+00
+    f18-->he4+n14 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.259e-49
+Isotope Equil Ratios: 4He(2.267e-01)  14N(6.667e+25) 18Fl(6.667e+01) 
+Isotope Mass Fractions: 4He(6.135e-02)  14N(0.000e+00) 18Fl(4.637e-05) 
+
+REACTION GROUP 17: isEquil=FALSE netflux=-1.346e-57 thisDevious/maxDevious=  nan
+    he4+n14-->n+f17 flux=0.000e+00 flux_true=0.000e+00
+    he4+n14-->n+f17 flux=0.000e+00 flux_true=0.000e+00
+    n+f17-->he4+n14 flux=1.346e-57 flux_true=1.346e-57
+    n+f17-->he4+n14 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=-1.346e-57
+Isotope Equil Ratios: 4He(1.621e-07)  14N(2.244e-08)   1n(6.667e+25) 17Fl(6.667e+25) 
+Isotope Mass Fractions: 4He(6.156e-02)  14N(5.961e-05)   1n(0.000e+00) 17Fl(0.000e+00) 
+
+REACTION GROUP 18: isEquil=FALSE netflux=-1.082e-29 thisDevious/maxDevious=5.000
+    he4+n14-->p+o17 flux=1.443e-321 flux_true=1.443e-321
+    he4+n14-->p+o17 flux=0.000e+00 flux_true=0.000e+00
+    he4+n14-->p+o17 flux=8.004e-322 flux_true=8.004e-322
+    p+o17-->he4+n14 flux=6.948e-30 flux_true=6.948e-30
+    p+o17-->he4+n14 flux=2.917e-99 flux_true=2.917e-99
+    p+o17-->he4+n14 flux=3.871e-30 flux_true=3.871e-30
+    Sum flux_true=-1.082e-29
+Isotope Equil Ratios: 4He(2.147e-06)  14N(6.814e-04)   1H(1.379e+07)  17O(1.164e-02) 
+Isotope Mass Fractions: 4He(6.156e-02)  14N(5.961e-05)   1H(2.975e-14)  17O(2.874e-06) 
+
+REACTION GROUP 19: isEquil=FALSE netflux=3.093e-29 thisDevious/maxDevious=14806514806232.229
+    p+n15-->o16 flux=3.093e-29 flux_true=3.093e-29
+    p+n15-->o16 flux=6.314e-77 flux_true=6.314e-77
+    o16-->p+n15 flux=0.000e+00 flux_true=0.000e+00
+    o16-->p+n15 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.093e-29
+Isotope Equil Ratios:  1H(6.667e+25)  15N(2.638e+01)  16O(9.470e-03) 
+Isotope Mass Fractions:  1H(0.000e+00)  15N(1.380e-09)  16O(3.753e-06) 
+
+REACTION GROUP 20: isEquil=FALSE netflux=8.244e-54 thisDevious/maxDevious=7272276811137277193355264.000
+    he4+n15-->f19 flux=8.244e-54 flux_true=8.244e-54
+    he4+n15-->f19 flux=6.347e-99 flux_true=6.347e-99
+    he4+n15-->f19 flux=9.721e-218 flux_true=9.721e-218
+    f19-->he4+n15 flux=0.000e+00 flux_true=0.000e+00
+    f19-->he4+n15 flux=0.000e+00 flux_true=0.000e+00
+    f19-->he4+n15 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=8.244e-54
+Isotope Equil Ratios: 4He(8.077e-06)  15N(6.667e+25) 19Fl(5.711e+01) 
+Isotope Mass Fractions: 4He(6.156e-02)  15N(0.000e+00) 19Fl(1.796e-09) 
+
+REACTION GROUP 21: isEquil=FALSE netflux=-8.122e-56 thisDevious/maxDevious=  nan
+    p+n15-->n+o15 flux=0.000e+00 flux_true=0.000e+00
+    n+o15-->p+n15 flux=8.122e-56 flux_true=8.122e-56
+    Sum flux_true=-8.122e-56
+Isotope Equil Ratios:  1H(1.857e+01)  15N(7.724e-01)   1n(6.667e+01)  15O(6.667e+01) 
+Isotope Mass Fractions:  1H(8.530e-09)  15N(1.949e-09)   1n(1.147e-16)  15O(7.645e-18) 
+
+REACTION GROUP 22: isEquil=FALSE netflux=-4.509e-57 thisDevious/maxDevious=  nan
+    he4+n15-->n+f18 flux=0.000e+00 flux_true=0.000e+00
+    n+f18-->he4+n15 flux=4.509e-57 flux_true=4.509e-57
+    Sum flux_true=-4.509e-57
+Isotope Equil Ratios: 4He(1.621e-07)  15N(7.724e-01)   1n(6.667e+01) 18Fl(6.667e+01) 
+Isotope Mass Fractions: 4He(6.156e-02)  15N(1.949e-09)   1n(2.776e-17) 18Fl(1.542e-18) 
+
+REACTION GROUP 23: isEquil=FALSE netflux=-3.698e-29 thisDevious/maxDevious=  nan
+    he4+n15-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    he4+n15-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    he4+n15-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    p+o18-->he4+n15 flux=3.581e-29 flux_true=3.581e-29
+    p+o18-->he4+n15 flux=1.175e-30 flux_true=1.175e-30
+    p+o18-->he4+n15 flux=1.561e-44 flux_true=1.561e-44
+    Sum flux_true=-3.698e-29
+Isotope Equil Ratios: 4He(2.229e-06)  15N(1.606e+01)   1H(6.667e+25)  18O(5.083e+01) 
+Isotope Mass Fractions: 4He(6.156e-02)  15N(2.538e-09)   1H(-3.012e-10)  18O(6.435e-10) 
+
+REACTION GROUP 24: isEquil=FALSE netflux=5.467e-26 thisDevious/maxDevious=1200632358.626
+    o15-->n15+e++nu flux=5.467e-26 flux_true=5.467e-26
+    Sum flux_true=5.467e-26
+Isotope Equil Ratios: 15O(6.667e+25)  15N(7.724e-01) 
+Isotope Mass Fractions: 15O(0.000e+00)  15N(1.949e-09) 
+
+REACTION GROUP 25: isEquil=FALSE netflux=-2.624e-45 thisDevious/maxDevious=  nan
+    he4+o15-->p+f18 flux=0.000e+00 flux_true=0.000e+00
+    he4+o15-->p+f18 flux=0.000e+00 flux_true=0.000e+00
+    p+f18-->he4+o15 flux=2.185e-107 flux_true=2.185e-107
+    p+f18-->he4+o15 flux=2.624e-45 flux_true=2.624e-45
+    Sum flux_true=-2.624e-45
+Isotope Equil Ratios: 4He(4.448e-07)  15O(6.667e+25)   1H(2.382e+01) 18Fl(6.667e+01) 
+Isotope Mass Fractions: 4He(6.156e-02)  15O(-6.960e-11)   1H(9.574e-09) 18Fl(5.800e-11) 
+
+REACTION GROUP 26: isEquil=FALSE netflux=3.647e-44 thisDevious/maxDevious=0.000
+    n+o16-->o17 flux=3.647e-44 flux_true=3.647e-44
+    o17-->n+o16 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.647e-44
+Isotope Equil Ratios:  1n(6.667e+25)  16O(9.755e-08)  17O(7.237e-08) 
+Isotope Mass Fractions:  1n(0.000e+00)  16O(3.753e-06)  17O(2.874e-06) 
+
+REACTION GROUP 27: isEquil=FALSE netflux=3.685e-29 thisDevious/maxDevious=536277056145074936250083812853447393280.000
+    p+o16-->f17 flux=3.685e-29 flux_true=3.685e-29
+    f17-->p+o16 flux=7.233e-189 flux_true=7.233e-189
+    Sum flux_true=3.685e-29
+Isotope Equil Ratios:  1H(6.667e+25)  16O(9.472e-03) 17Fl(6.667e+01) 
+Isotope Mass Fractions:  1H(0.000e+00)  16O(3.752e-06) 17Fl(5.018e-10) 
+
+REACTION GROUP 28: isEquil=FALSE netflux=9.693e-57 thisDevious/maxDevious=945651231170573568573440.000
+    he4+o16-->ne20 flux=9.693e-57 flux_true=9.693e-57
+    he4+o16-->ne20 flux=3.745e-269 flux_true=3.745e-269
+    ne20-->he4+o16 flux=0.000e+00 flux_true=0.000e+00
+    ne20-->he4+o16 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=9.693e-57
+Isotope Equil Ratios: 4He(1.626e-02)  16O(6.667e+25) 20Ne(2.896e+01) 
+Isotope Mass Fractions: 4He(6.154e-02)  16O(0.000e+00) 20Ne(6.911e-06) 
+
+REACTION GROUP 29: isEquil=FALSE netflux=-5.476e-32 thisDevious/maxDevious=  nan
+    he4+o16-->p+f19 flux=0.000e+00 flux_true=0.000e+00
+    he4+o16-->p+f19 flux=0.000e+00 flux_true=0.000e+00
+    p+f19-->he4+o16 flux=5.476e-32 flux_true=5.476e-32
+    p+f19-->he4+o16 flux=1.860e-89 flux_true=1.860e-89
+    Sum flux_true=-5.476e-32
+Isotope Equil Ratios: 4He(6.894e-07)  16O(3.492e-03)   1H(9.516e+00) 19Fl(1.200e+02) 
+Isotope Mass Fractions: 4He(6.156e-02)  16O(3.753e-06)   1H(5.385e-09) 19Fl(9.193e-11) 
+
+REACTION GROUP 30: isEquil=FALSE netflux=7.107e-44 thisDevious/maxDevious=0.000
+    n+o17-->o18 flux=7.107e-44 flux_true=7.107e-44
+    n+o17-->o18 flux=3.230e-83 flux_true=3.230e-83
+    o18-->n+o17 flux=0.000e+00 flux_true=0.000e+00
+    o18-->n+o17 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=7.107e-44
+Isotope Equil Ratios:  1n(6.667e+25)  17O(7.237e-08)  18O(6.710e-04) 
+Isotope Mass Fractions:  1n(0.000e+00)  17O(2.874e-06)  18O(1.134e-09) 
+
+REACTION GROUP 31: isEquil=FALSE netflux=3.666e-29 thisDevious/maxDevious=4318548708999591132809073100859637760.000
+    p+o17-->f18 flux=3.666e-29 flux_true=3.666e-29
+    p+o17-->f18 flux=4.152e-141 flux_true=4.152e-141
+    p+o17-->f18 flux=1.009e-51 flux_true=1.009e-51
+    f18-->p+o17 flux=0.000e+00 flux_true=0.000e+00
+    f18-->p+o17 flux=0.000e+00 flux_true=0.000e+00
+    f18-->p+o17 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=3.666e-29
+Isotope Equil Ratios:  1H(6.667e+25)  17O(1.164e-02) 18Fl(6.667e+01) 
+Isotope Mass Fractions:  1H(0.000e+00)  17O(2.874e-06) 18Fl(4.739e-10) 
+
+REACTION GROUP 32: isEquil=FALSE netflux=-7.556e-60 thisDevious/maxDevious=  nan
+    p+o17-->n+f17 flux=0.000e+00 flux_true=0.000e+00
+    n+f17-->p+o17 flux=7.556e-60 flux_true=7.556e-60
+    Sum flux_true=-7.556e-60
+Isotope Equil Ratios:  1H(1.857e+01)  17O(7.237e-08)   1n(6.667e+25) 17Fl(6.667e+25) 
+Isotope Mass Fractions:  1H(8.530e-09)  17O(2.874e-06)   1n(0.000e+00) 17Fl(0.000e+00) 
+
+REACTION GROUP 33: isEquil=FALSE netflux=5.417e-32 thisDevious/maxDevious=128401801941973408.000
+    p+o18-->f19 flux=3.934e-32 flux_true=3.934e-32
+    p+o18-->f19 flux=1.483e-32 flux_true=1.483e-32
+    p+o18-->f19 flux=8.409e-46 flux_true=8.409e-46
+    f19-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    f19-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    f19-->p+o18 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=5.417e-32
+Isotope Equil Ratios:  1H(6.667e+25)  18O(4.785e+01) 19Fl(4.237e+01) 
+Isotope Mass Fractions:  1H(0.000e+00)  18O(6.602e-10) 19Fl(7.064e-10) 
+
+REACTION GROUP 34: isEquil=FALSE netflux=-4.041e-58 thisDevious/maxDevious=  nan
+    p+o18-->n+f18 flux=0.000e+00 flux_true=0.000e+00
+    n+f18-->p+o18 flux=4.041e-58 flux_true=4.041e-58
+    Sum flux_true=-4.041e-58
+Isotope Equil Ratios:  1H(1.857e+01)  18O(6.710e-04)   1n(6.667e+25) 18Fl(6.667e+25) 
+Isotope Mass Fractions:  1H(8.530e-09)  18O(1.134e-09)   1n(0.000e+00) 18Fl(0.000e+00) 
+
+REACTION GROUP 35: isEquil=FALSE netflux=5.102e-29 thisDevious/maxDevious=352.528
+    f17-->o17+e++nu flux=5.102e-29 flux_true=5.102e-29
+    Sum flux_true=5.102e-29
+Isotope Equil Ratios:17Fl(6.667e+25)  17O(7.237e-08) 
+Isotope Mass Fractions:17Fl(0.000e+00)  17O(2.874e-06) 
+
+REACTION GROUP 36: isEquil=FALSE netflux=1.095e-63 thisDevious/maxDevious=0.000
+    n+f17-->f18 flux=1.095e-63 flux_true=1.095e-63
+    f18-->n+f17 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.095e-63
+Isotope Equil Ratios:  1n(6.667e+25) 17Fl(8.833e-02) 18Fl(8.926e+00) 
+Isotope Mass Fractions:  1n(0.000e+00) 17Fl(2.806e-28) 18Fl(2.678e-26) 
+
+REACTION GROUP 37: isEquil=FALSE netflux=6.825e-77 thisDevious/maxDevious=8816816049.974
+    he4+f17-->p+ne20 flux=6.825e-77 flux_true=6.825e-77
+    p+ne20-->he4+f17 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=6.825e-77
+Isotope Equil Ratios: 4He(1.621e-07) 17Fl(6.667e+25)   1H(1.857e+01) 20Ne(2.601e-12) 
+Isotope Mass Fractions: 4He(6.156e-02) 17Fl(0.000e+00)   1H(8.530e-09) 20Ne(3.909e-06) 
+
+REACTION GROUP 38: isEquil=FALSE netflux=5.076e-29 thisDevious/maxDevious=85266118.848
+    f18-->o18+e++nu flux=5.076e-29 flux_true=5.076e-29
+    Sum flux_true=5.076e-29
+Isotope Equil Ratios:18Fl(6.667e+25)  18O(6.710e-04) 
+Isotope Mass Fractions:18Fl(0.000e+00)  18O(1.134e-09) 
+
+REACTION GROUP 39: isEquil=FALSE netflux=1.470e-60 thisDevious/maxDevious=0.000
+    n+f18-->f19 flux=1.470e-60 flux_true=1.470e-60
+    f19-->n+f18 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=1.470e-60
+Isotope Equil Ratios:  1n(6.667e+25) 18Fl(8.926e+00) 19Fl(1.207e-07) 
+Isotope Mass Fractions:  1n(0.000e+00) 18Fl(2.678e-26) 19Fl(2.575e-10) 
+
+REACTION GROUP 40: isEquil=FALSE netflux=9.519e-36 thisDevious/maxDevious=1925366610689.997
+    p+f19-->ne20 flux=9.519e-36 flux_true=9.519e-36
+    p+f19-->ne20 flux=1.082e-98 flux_true=1.082e-98
+    ne20-->p+f19 flux=0.000e+00 flux_true=0.000e+00
+    ne20-->p+f19 flux=0.000e+00 flux_true=0.000e+00
+    Sum flux_true=9.519e-36
+Isotope Equil Ratios:  1H(4.609e+01) 19Fl(6.667e+25) 20Ne(4.171e-03) 
+Isotope Mass Fractions:  1H(3.638e-09) 19Fl(-2.177e-26) 20Ne(3.909e-06) 
+
+REACTION GROUP 41: isEquil=FALSE netflux=8.930e-238 thisDevious/maxDevious=0.000
+    n+ne20-->he4+o17 flux=8.930e-238 flux_true=8.930e-238
+    Sum flux_true=8.930e-238
+Isotope Equil Ratios:  1n(6.667e+25) 20Ne(6.667e+01)  4He(1.058e-02)  17O(2.963e+01) 
+Isotope Mass Fractions:  1n(-3.909e-05) 20Ne(1.954e-06)  4He(6.157e-02)  17O(5.173e-06) 
