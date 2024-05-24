@@ -1,0 +1,3 @@
+#gnuplot scipts for gnuplot
+# dataRef has reference calculations for some FERN calcs
+#dataFiles has the plotfiles for various fast,int,acc and ref calcs used in postFERN.cpp
