@@ -63,6 +63,10 @@
  *  2. Find a way to improve where t0 and tEQ are found (this would remove the need to implement a manual entry for the times to calculate over)
  *		-- t0 is set to step 0 so that could stay, but tEQ could be automated (beta decays could complicate this)
  *		-- maybe look at the fraction plot to see the max % PE/ASY(or QSS) obtain and use the 5th/6th column as a indicator where to set tEQ
+ *  3. Create capability to write out RMS values to a file and then make plots using gnuplot
+ *      -- Use the RMS @ each output step
+ *      -- output the uncertainty 
+ *
  *
  */
 #include <stdio.h>
@@ -95,19 +99,15 @@ using namespace std;
 #define tEQindex 175                 // The plotStep # for where the RMS calc will end (where RMS[i] ~0)
 #define calcs 4                      // The number of calculations being used for uncertainty calculations (typically 4 between the Fast, Intermediate, Accurate, and Reference cases) 
 
-
-char fastFile[] = "gnu_out/dataFiles/Alphafast1.data";
-char intFile[] = "gnu_out/dataFiles/AlphaInt1.data";
-char accFile[] = "gnu_out/dataFiles/AlphaAcc1.data";
-char refFile[] = "gnu_out/dataFiles/AlphaRef1.data";
+char fastFile[] = "gnu_out/dataFiles/AlphaFast.data";
+char intFile[] = "gnu_out/dataFiles/AlphaInt.data";
+char accFile[] = "gnu_out/dataFiles/AlphaAcc.data";
+char refFile[] = "gnu_out/dataFiles/AlphaRef.data";
 
 char rateFile[] = "data/rateLibrary_cnoAll.data";
 
 bool DetectBeta = true; 			// Beta decay detection
-
-
-
-
+bool showDetails = true;            // Show the details of the beta decays (isotopes with reactants and products)
 
 // The methods and functions are listed below from 1-3
 // Main function is at the bottom where the input file names will be edited
@@ -118,6 +118,7 @@ Take in the residual arrays
 Separate into ISOTOPE number of arrays
 Find the max value in each array
 _________________________________________________________________________________________________________________________________________________________*/
+
 double method1(std::vector<std::vector<double>>& resF, const std::vector<std::vector<double>>& resI, const std::vector<std::vector<double>>& resA){
 
 
@@ -131,13 +132,13 @@ double method1(std::vector<std::vector<double>>& resF, const std::vector<std::ve
         // Iterate over each row in current column
         for (int i = 0; i < plotSteps; i++) {
             // Update max value if current element is greater
-            if (resF[i][j] > maxValsF) {
+            if (resF[i][j] > maxValsF){
                 maxValsF = resF[i][j];
             }
-            if (resI[i][j] > maxValsI) {
+            if (resI[i][j] > maxValsI){
                 maxValsI = resI[i][j];
             }
-            if (resA[i][j] > maxValsA) {
+            if (resA[i][j] > maxValsA){
                 maxValsA = resA[i][j];
             }
         }
@@ -511,6 +512,45 @@ bool detectBetaMinus(const std::string& input_string, const std::string& sequenc
     return (found != std::string::npos);
 }
 
+bool detectElectronCapture(const std::string& input_string, const std::string& sequence) {
+    size_t found = input_string.find(sequence);
+    return (found != std::string::npos);
+}
+
+//__________________________________________________________________________________________________________________________________________________________________
+//  
+//                                                                      Functions to acquire Isotope indices in Beta Decays
+//          
+/*        int getreactantIndex(int k){
+            if(k > numberReactants-1){
+                printf("\nReac=%d %s",reacIndex,reacLabel[reacIndex]);
+                ss = Utilities::stringToChar(
+                    "\nERROR Reaction::getreactantIndex(k): k = %d larger than #reactants-1 = %d");
+                printf(stringToChar(ss),k,numberReactants-1);
+                return -1;
+            } else {
+                return reactantIndex[k];
+            }
+        }
+        
+        int getproductIndex(int k){
+            if(k > numberProducts-1){
+                printf("\n\nERROR: k-1=%d larger than number products %d",
+                    k,numberProducts);
+                return -1;
+            } else {
+                return productIndex[k];
+            }
+        }
+        
+        int getnumberReactants(){ return numberReactants; }
+        
+        int getnumberProducts(){ return numberProducts; }
+*/
+
+
+
+
 void BetaDecays(const char* filename){
 
     // Initialize variable for loop n: 0->SIZE
@@ -634,7 +674,8 @@ void BetaDecays(const char* filename){
 
 // DETECT BETA DECAYS BY LOOKING FOR "e++" or "e+nubar" which are only in the Beta +/- decays respectively.
     std::string sequencePlus = "e++nu";
-    std::string sequenceMinus = "e+nubar";        
+    std::string sequenceMinus = "e+nubar";
+    std::string sequenceEC = "+e-";        
 
     for(int i =0; i < SIZE; i++){
         std::string rxn = reactionType[i];
@@ -645,11 +686,41 @@ void BetaDecays(const char* filename){
         } 
         if (detectBetaMinus(rxn, sequenceMinus)) {
             std::cout << "Beta decay \"" << sequenceMinus << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (MINUS) " << std::endl;
-        } 
+        }
+        if (detectElectronCapture(rxn, sequenceEC)) {
+            std::cout << "Beta decay \"" << sequenceEC << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (e- cap.) " << std::endl;
+        }  
       //else {
       //    std::cout << "The sequence \"" << sequencePlus << " or " << sequenceMinus << "\" is not present in the line " << i << std::endl;
       //}
     }
+
+
+/*
+    for(int i=0; i < SIZE; i++){
+        
+        int nummreac = reaction[i].getnumberReactants();
+        int nummprod = reaction[i].getnumberProducts();
+        
+        // Write reactant symbols
+        
+        if(showDetails) printf("\nReaction=%d  REACTANTS: iso[0]=%s",
+        i,isoLabel[reaction[i].getreactantIndex(0)]);
+        
+        if(nummreac > 1 && showDetails) printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
+        if(nummreac > 2 && showDetails) printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
+        
+        // Write product Symbols
+        
+        if(showDetails) printf(" PRODUCTS: iso[%d]=%s",nummreac,isoLabel[reaction[i].getproductIndex(0)]);
+        
+        if(nummprod > 1 && showDetails) fprintf(pFileD," iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
+        if(nummprod > 2 && showDetails) fprintf(pFileD," iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
+        
+        if(showDetails) printf("\n");
+        
+    }
+*/
 
 
 }
@@ -744,12 +815,15 @@ int main() {
         // J-loop only writes the mass fractions into the X arrays
         // (r-ref, a-acc, m-med (or int)). Note values of data are in log(X)
         for (int j = 0; j < ISOTOPES; j++){
+
+
             Xflog[n][j] = F[7 + j];
             Xilog[n][j] = I[7 + j];
             Xalog[n][j] = A[7 + j];
             Xrlog[n][j] = R[7 + j];
 
-//            printf("Xilog[%d][%d] = %f\n",n,j,Xilog[n][j]);
+
+            //printf("Xflog[%d][%d] = %f\n",n,j,Xflog[n][j]);
         }
 
          n++;
