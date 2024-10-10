@@ -4243,8 +4243,11 @@ void BetaDecays(const char* filename){
     std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
 
     std::vector<std::string> reactionType(SIZE);
-    std::vector<int> BetaDecays;
+    std::vector<int> BetaArray;
+    std::vector<int> BetaIsotopes;
     std::vector<int> isoindex(ISOTOPES);
+    std::vector<int> IsotopeIndex(ISOTOPES);
+    std::vector<std::string> isotopeLabel(ISOTOPES);
 
     // Open file for reading
     std::ifstream fr(filename);
@@ -4344,7 +4347,25 @@ void BetaDecays(const char* filename){
 // DETECT BETA DECAYS BY LOOKING FOR "e++" or "e+nubar" which are only in the Beta +/- decays respectively.
     std::string sequencePlus = "e++nu";
     std::string sequenceMinus = "e+nubar";
-    std::string sequenceEC = "+e-";        
+    std::string sequenceEC = "+e-";     
+
+
+    //Reaction Reactant Strings
+    std::string reacIsoP, reacIsoP1, reacIsoP2;
+    std::string reacIsoM, reacIsoM1, reacIsoM2;
+    std::string reacIsoEC, reacIsoEC1, reacIsoEC2;
+
+    //Reaction Product Strings
+    std::string prodIsoP, prodIsoP1, prodIsoP2;
+    std::string prodIsoM, prodIsoM1, prodIsoM2;
+    std::string prodIsoEC, prodIsoEC1, prodIsoEC2;
+
+
+    // Populate isotopeLabel before the reaction loop
+    for (int j = 0; j < ISOTOPES; j++) {
+        isotopeLabel[j] = isotope[j].getLabel();
+    }  
+
 
     for(int i =0; i < SIZE; i++){
         std::string rxn = reactionType[i];
@@ -4352,72 +4373,247 @@ void BetaDecays(const char* filename){
         int nummprod = reaction[i].getnumberProducts();
 
 
-        if (detectBetaPlus(rxn, sequencePlus)) {
+        if (detectBetaPlus(rxn, sequencePlus)){
+
+        	BetaArray.push_back(i); // Add reaction index to the Beta decay Vector
+            
             std::cout << "\nBeta decay \"" << sequencePlus << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (PLUS) ";
 
+            reacIsoP = isoLabel[reaction[i].getreactantIndex(0)];
+
                     // Write reactant symbols
+        			printf("\nReaction=%d  REACTANTS: iso[0]=%s", i,isoLabel[reaction[i].getreactantIndex(0)]);
+        			if(nummreac > 1){
+                        reacIsoP1 = isoLabel[reaction[i].getreactantIndex(1)];
+                        printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
+                    }
+
+        			if(nummreac > 2){
+                        reacIsoP2 = isoLabel[reaction[i].getreactantIndex(2)];
+                        printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
+                    }
         
-        			printf("\nReaction=%d  REACTANTS: iso[0]=%s -- [%d]", i,isoLabel[reaction[i].getreactantIndex(0)]);
-        
-        			if(nummreac > 1) printf(" iso[1]=%s -- [%d]",isoLabel[reaction[i].getreactantIndex(1)]);
-        			if(nummreac > 2) printf(" iso[2]=%s -- [%d]",isoLabel[reaction[i].getreactantIndex(2)]);
-        
-        			// Write product Symbols
-        
-        			printf(" PRODUCTS: iso[%d]=%s -- [%d]",nummreac,isoLabel[reaction[i].getproductIndex(0)]);
-        
-        			if(nummprod > 1) printf(" iso[%d]=%s -- [%d]",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
-        			if(nummprod > 2) printf(" iso[%d]=%s -- [%d]",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
-        
-        			printf("\n");
-        } 
+            prodIsoP = isoLabel[reaction[i].getproductIndex(0)];
+        			
+                    // Write product Symbols
+        			printf(" PRODUCTS: iso[%d]=%s",nummreac,isoLabel[reaction[i].getproductIndex(0)]);
+        			if(nummprod > 1){
+                        prodIsoP1 = isoLabel[reaction[i].getproductIndex(1)];
+                        printf(" iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
+
+                    }
+        			if(nummprod > 2){
+                        prodIsoP2 = isoLabel[reaction[i].getproductIndex(2)];
+                        printf(" iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
+                    }
+
+                    printf("\n");
+
+                    //std::cout << "Index: " << i << " Product Isotope Label: " << prodIsoP << std::endl;
+
+            for (int j = 0; j < ISOTOPES; j++) {
+                    //printf("\n Isotope index: %d  = %s  --", j, isotopeLabel[j].c_str());
+
+                    if (reacIsoP.compare(isotopeLabel[j]) == 0 || reacIsoP1.compare(isotopeLabel[j]) == 0 || reacIsoP2.compare(isotopeLabel[j]) == 0){
+                    	BetaIsotopes.push_back(j);
+                        printf("Reactant Isotope: %s = %d (+)\n", reacIsoP.c_str(), j);
+                        if (nummreac > 1){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Reactant Isotope: %s = %d (+)\n", reacIsoP1.c_str(), j);
+                        }
+                        
+                        if (nummreac > 2){
+                        	BetaIsotopes.push_back(j);
+                        	printf("Reactant Isotope: %s = %d (+)\n", reacIsoP2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+
+                    if (prodIsoP.compare(isotopeLabel[j]) == 0 || prodIsoP1.compare(isotopeLabel[j]) == 0 || prodIsoP2.compare(isotopeLabel[j]) == 0){
+                        BetaIsotopes.push_back(j);
+                        printf("Product Isotope: %s = %d  (+)\n", prodIsoP.c_str(), j);
+                        if (nummprod > 1){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (+)\n", prodIsoP1.c_str(), j);
+                        }
+                        
+                        if (nummprod > 2){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (+)\n", prodIsoP2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+
+                } // END j for loop over ISOTOPES
+
+        } // END BETA PLUS CONDITIONAL
+
 
         if (detectBetaMinus(rxn, sequenceMinus)) {
+
+        	BetaArray.push_back(i); // Add reaction index to the Beta decay Vector
+
             std::cout << "\nBeta decay \"" << sequenceMinus << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (MINUS) ";
 
+            reacIsoM = isoLabel[reaction[i].getreactantIndex(0)];      
+
                     // Write reactant symbols
-        
-        			printf("\nReaction=%d  REACTANTS: iso[0]=%s -- [%d]", i,isoLabel[reaction[i].getreactantIndex(0)]);
-        
-        			if(nummreac > 1) printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
-        			if(nummreac > 2) printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
-        
-        			// Write product Symbols
-        
+        			printf("\nReaction=%d  REACTANTS: iso[0]=%s", i,isoLabel[reaction[i].getreactantIndex(0)]);
+        			if(nummreac > 1){
+                        reacIsoM1 = isoLabel[reaction[i].getreactantIndex(1)];
+                        printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
+                    }
+
+        			if(nummreac > 2){ 
+                        reacIsoM2 = isoLabel[reaction[i].getreactantIndex(2)];
+                        printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
+                    }
+
+            prodIsoM = isoLabel[reaction[i].getproductIndex(0)];
+        			
+                    // Write product Symbols
         			printf(" PRODUCTS: iso[%d]=%s",nummreac,isoLabel[reaction[i].getproductIndex(0)]);
-        
-        			if(nummprod > 1) printf(" iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
-        			if(nummprod > 2) printf(" iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
+        			if(nummprod > 1){
+                        prodIsoM1 = isoLabel[reaction[i].getproductIndex(1)];
+                        printf(" iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
+                    }
+
+        			if(nummprod > 2){ 
+                        prodIsoM2 = isoLabel[reaction[i].getproductIndex(2)];
+                        printf(" iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
+                    }
         
         			printf("\n");
-        }
+
+                for (int j = 0; j < ISOTOPES; j++) {
+                    //printf("\n Isotope index: %d  = %s  --", j, isotopeLabel[j].c_str());
+
+                    if (reacIsoM.compare(isotopeLabel[j]) == 0 || reacIsoM1.compare(isotopeLabel[j]) == 0 || reacIsoM2.compare(isotopeLabel[j]) == 0){
+                    	BetaIsotopes.push_back(j);
+                        printf("Reactant Isotope: %s = %d (-)\n", reacIsoM.c_str(), j);
+                        if (nummreac > 1){
+                        	BetaIsotopes.push_back(j);
+                        	printf("Reactant Isotope: %s = %d (-)\n", reacIsoM1.c_str(), j);
+                        }
+                        
+                        if (nummreac > 2){
+                        	BetaIsotopes.push_back(j);
+                        	printf("Reactant Isotope: %s = %d (-)\n", reacIsoM2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+
+                    if (prodIsoM.compare(isotopeLabel[j]) == 0 || prodIsoM1.compare(isotopeLabel[j]) == 0 || prodIsoM2.compare(isotopeLabel[j]) == 0){
+                        BetaIsotopes.push_back(j);
+                        printf("Product Isotope: %s = %d  (-)\n", prodIsoM.c_str(), j);
+                        if (nummprod > 1){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (-)\n", prodIsoM1.c_str(), j);
+                        }
+                        
+                        if (nummprod > 2){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (-)\n", prodIsoM2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+                }// END j-loop over ISOTOPES
+
+        } // END BETA MINUS CONDITIONAL
+
 
         if (detectElectronCapture(rxn, sequenceEC)) {
+
+        	BetaArray.push_back(i); // Add reaction index to the Beta decay Vector
+
             std::cout << "\nBeta decay \"" << sequenceEC << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (e- cap.) ";
 
+            reacIsoEC = isoLabel[reaction[i].getreactantIndex(0)]; 
+
                     // Write reactant symbols
+        			printf("\nReaction=%d  REACTANTS: iso[0]=%s", i,isoLabel[reaction[i].getreactantIndex(0)]);
+        			if(nummreac > 1){
+                        reacIsoEC1 = isoLabel[reaction[i].getreactantIndex(1)];
+                        printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
+                    }
+        			
+                    if(nummreac > 2){
+                        reacIsoEC2 = isoLabel[reaction[i].getreactantIndex(2)];
+                        printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
+                    }
         
-        			printf("\nReaction=%d  REACTANTS: iso[0]=%s -- [%d]", i,isoLabel[reaction[i].getreactantIndex(0)]);
-        
-        			if(nummreac > 1) printf(" iso[1]=%s",isoLabel[reaction[i].getreactantIndex(1)]);
-        			if(nummreac > 2) printf(" iso[2]=%s",isoLabel[reaction[i].getreactantIndex(2)]);
-        
-        			// Write product Symbols
-        
+            prodIsoEC = isoLabel[reaction[i].getproductIndex(0)];
+        			
+                    // Write product Symbols
         			printf(" PRODUCTS: iso[%d]=%s",nummreac,isoLabel[reaction[i].getproductIndex(0)]);
-        
-        			if(nummprod > 1) printf(" iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
-        			if(nummprod > 2) printf(" iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
-        
+        			if(nummprod > 1){
+                        prodIsoEC1 = isoLabel[reaction[i].getproductIndex(1)];
+                        printf(" iso[%d]=%s",nummreac+1,isoLabel[reaction[i].getproductIndex(1)]);
+                    }
+        			
+                    if(nummprod > 2){
+                        prodIsoEC2 = isoLabel[reaction[i].getproductIndex(2)];
+                        printf(" iso[%d]=%s",nummreac+2,isoLabel[reaction[i].getproductIndex(2)]);
+                    }
         			printf("\n");
+
+                for (int j = 0; j < ISOTOPES; j++) {
+                    //printf("\n Isotope index: %d  = %s  --", j, isotopeLabel[j].c_str());
+
+                    if (reacIsoEC.compare(isotopeLabel[j]) == 0 || reacIsoEC1.compare(isotopeLabel[j]) == 0 || reacIsoEC2.compare(isotopeLabel[j]) == 0){
+                    	BetaIsotopes.push_back(j);
+                        printf("Reactant Isotope: %s = %d (E.C.)\n", reacIsoEC.c_str(), j);
+                        if(nummreac > 1){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Reactant Isotope: %s = %d (E.C.)\n", reacIsoEC1.c_str(), j);
+                        }
+                        
+                        if(nummreac > 2){
+                        	BetaIsotopes.push_back(j);
+                        	printf("Reactant Isotope: %s = %d (E.C.)\n", reacIsoEC2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+
+                    if (prodIsoEC.compare(isotopeLabel[j]) == 0 || prodIsoEC1.compare(isotopeLabel[j]) == 0 || prodIsoEC2.compare(isotopeLabel[j]) == 0){
+                    	BetaIsotopes.push_back(j);
+                        printf("Product Isotope: %s = %d  (E.C.)\n", prodIsoEC.c_str(), j);
+                        if(nummprod > 1){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (E.C.)\n", prodIsoEC1.c_str(), j);
+                        }
+                        
+                        if(nummprod > 2){
+                        	BetaIsotopes.push_back(j);
+                         	printf("Product Isotope: %s = %d (E.C.)\n", prodIsoEC2.c_str(), j);
+                        }
+                        // UPDATE VIA BETA ANALYTICAL()
+                    }
+                }
         }  
   
         	
 
     }
 
+			// Display the contents of betaArray
+			std::cout << "Beta array contents: ";
+			for (int index : BetaArray) {
+    			std::cout << index << " ";
+			}
+			std::cout << std::endl;
 
-}
+			// Display the contents of betaIsotopes
+			std::cout << "Beta Isotopes contents: ";
+			for (int index : BetaIsotopes) {
+    			std::cout << index << " ";
+			}
+			std::cout << std::endl;
+
+
+
+
+} // END BetaDecays function
 
 // ---------------------------------
 // ------- Main CPU routine --------
