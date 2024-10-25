@@ -13,7 +13,7 @@ all: explicitMatrix.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtrange.cpp CAT
 #	$(CC) -o test testread.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o test.out testread.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o FERNA FERNA.cpp $(CFLAGS) $(LIBS)
-
+	$(CC) -o FERN FERN.cpp $(CFLAGS) $(LIBS)
 
 vectorOps: vectorOps.cpp
 	$(CC) -c vectorOps.cpp
