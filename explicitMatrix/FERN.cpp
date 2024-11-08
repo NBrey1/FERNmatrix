@@ -80,6 +80,8 @@
 #include <functional>
 #include <cmath>
 #include <tuple>
+#include <unordered_map>
+//#include "reacLib.h" // Include ReacLib header
 
 using namespace std;
 //using std::string;
@@ -174,7 +176,7 @@ void indexCNOCycle(void);
 //  to read them in and assign them dynamically.
 
 #define ISOTOPES 16                  // Max isotopes in network (e.g. 16 for alpha network)
-#define SIZE 134                      // Max number of reactions (e.g. 48 for alpha network)
+#define SIZE 48                      // Max number of reactions (e.g. 48 for alpha network)
 
 #define plotSteps 200                 // Number of plot output steps
 #define LABELSIZE 35                  // Max size of reaction string a+b>c in characters
@@ -199,24 +201,24 @@ FILE* pfnet;
 // output by the Java code through the stream toCUDAnet has the expected format 
 // for this file. Standard filenames for test cases are listed in table above.
 
-char networkFile[] = "data/network_cnoAll.inp";
+char networkFile[] = "data/network_alpha.inp";
 
 // Filename for input rates library data. The file rateLibrary.data output by 
 // the Java code through the stream toRateData has the expected format for this 
 // file.  Standard filenames for test cases are listed in table above.
 
-char rateLibraryFile[] = "data/rateLibrary_cnoAll.data";
+char rateLibraryFile[] = "data/rateLibrary_alpha.data";
 
 //			BETA DECAY DETECTION 
 // Keeep rate file to incorporate all reactions (i.e. 365 largest size network)
 char rateFile[] = "data/rateLibrary_cnoAll.data";
 
-bool DetectBeta = true; 			// Beta decay detection
+bool DetectBeta = false; 			// Beta decay detection
 
 // Whether or not to find the beta decay sin the rateLibrary file and use
 // the isotopes populated by beta decays to be calculated analytically
 // post explosion in order to improve speed & accuracy
-bool detectBetaDecays = true;
+bool detectBetaDecays = false;
 
 // Whether to use constant T and rho (hydroProfile false), in which case a
 // constant T9 = T9_start and rho = rho_start are used, or to read
@@ -269,7 +271,7 @@ FILE* plotfile5;
 // or showDetails2 true may generate large output files (MB to GB for large networks).
 
 bool showAddRemove = true;   // Show addition/removal of RG from equilibrium
-bool showDetails = true;    // Controls diagnostics to pFileD -> gnu_out/diagnostics.data
+bool showDetails = false;    // Controls diagnostics to pFileD -> gnu_out/diagnostics.data
 bool showDetails2 = false;   // Controls diagnostics to pfnet -> gnu_out/network.data
 
 // Control which explicit algebraic approximations are used. Eventually
@@ -367,8 +369,8 @@ bool isotopeInEquilLast[ISOTOPES];
 // constant values for testing purposes, or read in a temperature and density
 // hydro profile if hydroProfile is true.
 
-double T9_start = 0.02;      // Initial temperature in units of 10^9 K
-double rho_start = 20;        // Initial density in g/cm^3
+double T9_start = 7;      // Initial temperature in units of 10^9 K
+double rho_start = 1e8;        // Initial density in g/cm^3
 
 // Integration time data. The variables start_time and stop_time 
 // define the range of integration (all time units in seconds),
@@ -384,8 +386,8 @@ double rho_start = 20;        // Initial density in g/cm^3
 
 double start_time = 1e-20;             // Start time for integration
 double logStart = log10(start_time);   // Base 10 log start time
-double startplot_time =  1e7;         // Start time for plot output
-double stop_time = 1e18;                // Stop time for integration
+double startplot_time =  1e-7;         // Start time for plot output
+double stop_time = 1e-2;                // Stop time for integration
 double logStop = log10(stop_time);     // Base-10 log stop time5
 double dt_start = 0.01*start_time;     // Initial value of integration dt
 double dt_saved;                       // Full timestep used for this int step
@@ -403,8 +405,8 @@ double dt_EA = dt_start;               // Max asymptotic timestep
 
 int dtMode;                            // Dual dt stage (0=full, 1=1st half, 2=2nd half)
 
-double massTol_asy = 3e-8;             // Tolerance param if no reactions equilibrated
-double massTol_asyPE = 3e-8;           // Tolerance param if some reactions equilibrated
+double massTol_asy = 1e-6;             // Tolerance param if no reactions equilibrated
+double massTol_asyPE = 1e-6;           // Tolerance param if some reactions equilibrated
 double massTol = massTol_asy;          // Timestep tolerance parameter for integration
 double downbumper = 0.7;               // Asy dt decrease factor
 double sf = 1e25;                      // dt_FE = sf/fastest rate
@@ -624,6 +626,30 @@ int* MapFminus;   // Index mapper for Fminus (Dim totalFminus)
 
 int* tempInt1;
 int* tempInt2;
+
+// Arrays used for Beta decay detection and corrections
+	std::vector<std::pair<int, std::vector<int>>> DecayData;
+    std::vector<std::string> reactionType(SIZE);
+    std::vector<int> BetaArray;
+    std::vector<int> BetaIsotopes;
+    std::vector<int> isoindex(ISOTOPES);
+    std::vector<int> IsotopeIndex(ISOTOPES);
+    std::vector<std::string> isotopeLabel(ISOTOPES);
+    std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
+
+
+    //Reaction Reactant Strings
+    std::string reacIsoP, reacIsoP1, reacIsoP2;
+    std::string reacIsoM, reacIsoM1, reacIsoM2;
+    std::string reacIsoEC, reacIsoEC1, reacIsoEC2;
+
+    //Reaction Product Strings
+    std::string prodIsoP, prodIsoP1, prodIsoP2;
+    std::string prodIsoM, prodIsoM1, prodIsoM2;
+    std::string prodIsoEC, prodIsoEC1, prodIsoEC2;
+
+    int nummreac = 0;
+    int nummprod = 0;
 
 char dasher[] = "---------------------------------------------";
 
@@ -4240,14 +4266,8 @@ void BetaDecays(const char* filename){
     std::vector<std::vector<int>> productN(SIZE, std::vector<int>(4));
     std::vector<std::vector<int>> ReactantIndex(SIZE, std::vector<int>(4));
     std::vector<std::vector<int>> ProductIndex(SIZE, std::vector<int>(4));
-    std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
+    //std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
 
-    std::vector<std::string> reactionType(SIZE);
-    std::vector<int> BetaArray;
-    std::vector<int> BetaIsotopes;
-    std::vector<int> isoindex(ISOTOPES);
-    std::vector<int> IsotopeIndex(ISOTOPES);
-    std::vector<std::string> isotopeLabel(ISOTOPES);
 
     // Open file for reading
     std::ifstream fr(filename);
@@ -4276,8 +4296,12 @@ void BetaDecays(const char* filename){
 
 
         float reactionParams[7];
-        for (int i = 0; i < 7; ++i)
+        for (int i = 0; i < 7; ++i){
             fr >> reactionParams[i];
+
+            reactionParams[0] = P0[n];
+
+        }
             //std::cout << "Reaction parameters: ";
 
         //for (int i = 0; i < 7; ++i)
@@ -4350,16 +4374,6 @@ void BetaDecays(const char* filename){
     std::string sequenceEC = "+e-";     
 
 
-    //Reaction Reactant Strings
-    std::string reacIsoP, reacIsoP1, reacIsoP2;
-    std::string reacIsoM, reacIsoM1, reacIsoM2;
-    std::string reacIsoEC, reacIsoEC1, reacIsoEC2;
-
-    //Reaction Product Strings
-    std::string prodIsoP, prodIsoP1, prodIsoP2;
-    std::string prodIsoM, prodIsoM1, prodIsoM2;
-    std::string prodIsoEC, prodIsoEC1, prodIsoEC2;
-
 
     // Populate isotopeLabel before the reaction loop
     for (int j = 0; j < ISOTOPES; j++) {
@@ -4369,8 +4383,8 @@ void BetaDecays(const char* filename){
 
     for(int i =0; i < SIZE; i++){
         std::string rxn = reactionType[i];
-        int nummreac = reaction[i].getnumberReactants();
-        int nummprod = reaction[i].getnumberProducts();
+        nummreac = reaction[i].getnumberReactants();
+        nummprod = reaction[i].getnumberProducts();
 
 
         if (detectBetaPlus(rxn, sequencePlus)){
@@ -4417,6 +4431,7 @@ void BetaDecays(const char* filename){
                     if (reacIsoP.compare(isotopeLabel[j]) == 0 || reacIsoP1.compare(isotopeLabel[j]) == 0 || reacIsoP2.compare(isotopeLabel[j]) == 0){
                     	BetaIsotopes.push_back(j);
                         printf("Reactant Isotope: %s = %d (+)\n", reacIsoP.c_str(), j);
+
                         if (nummreac > 1){
                         	BetaIsotopes.push_back(j);
                          	printf("Reactant Isotope: %s = %d (+)\n", reacIsoP1.c_str(), j);
@@ -4432,6 +4447,7 @@ void BetaDecays(const char* filename){
                     if (prodIsoP.compare(isotopeLabel[j]) == 0 || prodIsoP1.compare(isotopeLabel[j]) == 0 || prodIsoP2.compare(isotopeLabel[j]) == 0){
                         BetaIsotopes.push_back(j);
                         printf("Product Isotope: %s = %d  (+)\n", prodIsoP.c_str(), j);
+
                         if (nummprod > 1){
                         	BetaIsotopes.push_back(j);
                          	printf("Product Isotope: %s = %d (+)\n", prodIsoP1.c_str(), j);
@@ -4597,7 +4613,7 @@ void BetaDecays(const char* filename){
     }
 
 			// Display the contents of betaArray
-			std::cout << "Beta array contents: ";
+		/*	std::cout << "Beta array contents: ";
 			for (int index : BetaArray) {
     			std::cout << index << " ";
 			}
@@ -4609,8 +4625,7 @@ void BetaDecays(const char* filename){
     			std::cout << index << " ";
 			}
 			std::cout << std::endl;
-
-
+		*/
 
 
 } // END BetaDecays function
@@ -7249,5 +7264,92 @@ void correctCNOCycle(){
     Y[index13C] = Y13Ccorr;
     X[index13C] = Y[index13C] * 13;
     
+}
+
+
+// take in reaction index 
+void correctBetaDecays(){
+
+    double Decayrate;
+    double dYbeta;
+    const double ln2 = log(2);
+
+    // Retrieve the half-life for the isotope at index i
+   // Decayrate = P0[i]; // Function to get half-life for the isotope at index i
+
+	for (int k : BetaArray) {
+
+			Decayrate = P0[k];
+
+
+			// Check for valid half-life
+    		if (Decayrate <= 0) {
+        		printf("Invalid half-life for index [%d] -- %f \n ", k, Decayrate);
+        		return; // Exit the function if the half-life is invalid
+    		}
+
+
+			reacIsoP = isoLabel[reaction[k].getreactantIndex(0)];
+
+        	if(nummreac > 1) reacIsoP1 = isoLabel[reaction[k].getreactantIndex(1)];
+        	if(nummreac > 2) reacIsoP2 = isoLabel[reaction[k].getreactantIndex(2)];
+        
+            prodIsoP = isoLabel[reaction[k].getproductIndex(0)];
+  
+        	if(nummprod > 1) prodIsoP1 = isoLabel[reaction[k].getproductIndex(1)];
+        	if(nummprod > 2) prodIsoP2 = isoLabel[reaction[k].getproductIndex(2)];
+
+
+
+			for (int j = 0; j < ISOTOPES; j++){
+                    //printf("\n Isotope index: %d  = %s  --", j, isotopeLabel[j].c_str());
+
+                    if (reacIsoM.compare(isotopeLabel[j]) == 0 || reacIsoM1.compare(isotopeLabel[j]) == 0 || reacIsoM2.compare(isotopeLabel[j]) == 0){
+                    	
+                            
+				    		// Calculate the amount of isotope that has decayed
+   							dYbeta = Y0[j] * (1 - exp(-Decayrate * dt)); // Amount decayed from Y0[i]
+
+                            // Update the parent isotope abundance
+    						Y[j] = Y0[j] * exp(-Decayrate * dt); // Current abundance after decay
+printf("Updated abundance of Parent Isotope: %d from Y0 = %f to Y = %f \n",j, Y0[j], Y[j]);
+
+                        if (nummreac > 1){
+                          	
+                        }
+                        
+                        if (nummreac > 2){
+                        	
+                        }
+                        
+                    }
+
+                    if (prodIsoM.compare(isotopeLabel[j]) == 0 || prodIsoM1.compare(isotopeLabel[j]) == 0 || prodIsoM2.compare(isotopeLabel[j]) == 0){
+                       
+                       
+                    	    // Update the daughter isotope abundance
+    						Y[j] = Y0[j] + dYbeta; // Add the decayed amount to Y[j]
+
+                        if (nummprod > 1){
+                        	
+                         	
+                        }
+                        
+                        if (nummprod > 2){
+                        	
+                         	
+                        }
+                        
+                    }
+                }// END j-loop over ISOTOPES
+                                   
+
+   			}
+
+
+    // Output the updated abundances
+    //printf("Updated abundance of Parent Isotope: %d from Y0 = %f to Y = %f \n",i, Y0[i], Y[i]);
+    //printf("Updated abundance of Daughter Isotope: %d from Y0 = %f to Y = %f \n",j, Y0[j], Y[j]);
+
 }
 
