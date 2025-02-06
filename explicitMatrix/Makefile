@@ -5,7 +5,7 @@ CFLAGS=$(CCDBGFLAGS) $(CCOFLAGS) -I.
 
 #compiler flags
 LIBS=-lgsl -lgslcblas -lgmp
-all: explicitMatrix.cpp  FERN.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtrange.cpp CATS.cpp
+all: explicitMatrix.cpp  FERN.cpp ReverseDetect.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtrange.cpp CATS.cpp
 	$(CC) -o explicitMatrix explicitMatrix.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o EM.out explicitMatrix.cpp $(CFLAGS) $(LIBS)
 	$(CC) -o postFERN postFERN.cpp $(CFLAGS) $(LIBS)
@@ -14,6 +14,7 @@ all: explicitMatrix.cpp  FERN.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtran
 #	$(CC) -o test.out testread.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o FERNA FERNA.cpp $(CFLAGS) $(LIBS)
 	$(CC) -o FERN FERN.cpp $(CFLAGS) $(LIBS)
+	$(CC) -o reverse ReverseDetect.cpp $(CFLAGS) $(LIBS)	
 
 vectorOps: vectorOps.cpp
 	$(CC) -c vectorOps.cpp
