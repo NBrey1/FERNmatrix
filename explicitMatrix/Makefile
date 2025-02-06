@@ -5,8 +5,8 @@ CFLAGS=$(CCDBGFLAGS) $(CCOFLAGS) -I.
 
 #compiler flags
 LIBS=-lgsl -lgslcblas -lgmp
-all: explicitMatrix.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtrange.cpp CATS.cpp
-#	$(CC) -o explicitMatrix explicitMatrix.cpp $(CFLAGS) $(LIBS)
+all: explicitMatrix.cpp  FERN.cpp #EMATS.cpp # TEST.cpp #NATS.cpp CEM.cpp #dtrange.cpp CATS.cpp
+	$(CC) -o explicitMatrix explicitMatrix.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o EM.out explicitMatrix.cpp $(CFLAGS) $(LIBS)
 	$(CC) -o postFERN postFERN.cpp $(CFLAGS) $(LIBS)
 #	$(CC) -o analysis.out postFERN.cpp $(CFLAGS) $(LIBS)
