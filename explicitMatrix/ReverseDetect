@@ -1,0 +1,256 @@
+/*
+ * Code postFERN.cpp to run analyses on FERN outputs 
+ * 
+ * Compile with:
+ *     gcc postFERN.cpp -o postFERN -lgsl -lgslcblas -lm -lstdc++
+ * 
+ * Resulting compiled code can be executed with
+ * 
+ *     ./postFERN | tee temp.txt
+ * 
+ *  
+ * ----------------------------------
+ * To set up a specific calculation:
+ * ----------------------------------
+ * 
+ * 1. Change values of ISOTOPES and SIZE to match that of the network
+ * 2. Double check the number of plot steps (lines in output file)
+ * 3. Change the values of t0index and tEQindex to match the indice of the calculation being analysed
+ * 4. Change input files in main to match the output files from explicitMatrix.cpp
+ *    - Input files are found in main
+ *	  - Data file for beta decay detection is also in main
+ *
+ *
+ * ------------------------------------------------------------------------------------------
+ * SOME SAMPLE NETWORKS:
+ * 
+ * Network   ISOTOPES     SIZE     networkFile[]               rateLibraryFile[]
+ * 3=alpha          3        8     data/network_3alpha.inp     data/rateLibrary_3alpha.data
+ * 4-alpha          4       14     data/network_4alpha.inp     data/rateLibrary_4alpha.data
+ * alpha           16       48     data/network_alpha.inp      data/rateLibrary_alpha.data
+ * pp               7       28     data/network_pp.inp         data/rateLibrary_pp.data
+ * main cno         8       22     data/network_cno.inp        data/rateLibrary_cno.data
+ * full cno        16      134     data/network_cnoAll.inp     data/rateLibrary_cnoAll.data
+ * 48              48      299     data/network_48.inp         data/rateLibrary_48.data
+ * 70(C-O)         70      598     data/network_70.inp         data/rateLibrary_70.data
+ * 70(4He)         70      598     data/network_70_alpha.inp   data/rateLibrary_70.data
+ * 116            116     1135     data/network_116.inp        data/rateLibrary_116.data
+ * nova134        134     1566     data/network_nova134.inp    data/rateLibrary_nova134.data
+ * 150 (12C-16O)  150     1604     data/network_150.inp        data/rateLibrary_150.data
+ * 150 (solar)    150     1604     data/network_150_solar.inp  data/rateLibrary_150.data
+ * 194            194     2232     network_194.inp             data/rateLibrary_194.data
+ * 268            268     3175     network_268.inp             data/rateLibrary_268.data
+ * 365 (12C-16O)  365     4395     data/network_365.inp        data/rateLibrary_365.data
+ * 365 (solar)    365     4395     data/network_365_solar.inp  data/rateLibrary_365.data
+ * tidalSN_alpha   16       48     data/network_alpha_he4.inp  data/rateLibrary_alpha.data
+ * big bang         8       64     data/network_bigbang.inp    data/rateLibrary_bigbang.data
+ * 28              28      104     data/network_28.inp         data/rateLibrary_28.data
+ * 30P             47      283     data/network_test30P.inp    data/rateLibrary_test30P.data
+ * ------------------------------------------------------------------------------------------
+ *
+ * 
+ * AUTHORS:
+ * ---------------
+ * Nick Brey
+ *
+ * ----------------
+ *
+ *		TO DO LIST:
+ *	___________________
+ *
+ *	1. Fix the errors that occur when nan is in an output file (anything larger than alpha network)
+ * 		-- in matlab the nan values were set to = 0. gdb shows the nan in the file is an error in writing out (actual X values are of order 1e-18 or lower)
+ *  2. Find a way to improve where t0 and tEQ are found (this would remove the need to implement a manual entry for the times to calculate over)
+ *		-- t0 is set to step 0 so that could stay, but tEQ could be automated (beta decays could complicate this)
+ *		-- maybe look at the fraction plot to see the max % PE/ASY(or QSS) obtain and use the 5th/6th column as a indicator where to set tEQ
+ *  3. Create capability to write out RMS values to a file and then make plots using gnuplot
+ *      -- Use the RMS @ each output step
+ *      -- output the uncertainty 
+ *
+ *
+ */
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <cmath>
+#include <string.h>
+#include <stdbool.h>
+#include <ctime>
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_blas.h>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <tuple>
+
+using namespace std;
+//using std::string;
+
+#define ISOTOPES 16                  // Max isotopes in network (e.g. 16 for alpha network)
+#define SIZE 48					     // The number of reactions in the network
+#define plotSteps 1000               // Number of plot output steps (usually set to 200)
+
+#define t0index 0                    // The plotStep # for where the error starts, (where RMS[i] > 0) 
+#define tEQindex 850                 // The plotStep # for where the RMS calc will end (where RMS[i] ~0)
+#define calcs 4                      // The number of calculations being used for uncertainty calculations (typically 4 between the Fast, Intermediate, Accurate, and Reference cases) 
+
+char fastFile[] = "gnu_out/dataFiles/AlphaHydroFast1.data";
+char intFile[] = "gnu_out/dataFiles/AlphaHydroInt1.data";
+char accFile[] = "gnu_out/dataFiles/AlphaHydroAcc1.data";
+char refFile[] = "gnu_out/dataFiles/AlphaHydroRef1.data";
+
+char rateFile[] = "data/rateLibrary_cnoAll.data";
+
+bool DetectBeta = false; 			// Beta decay detection
+bool showDetails = false;            // Show the details of the beta decays (isotopes with reactants and products)
+
+
+
+void BetaDecays(const char* filename){
+
+    // Initialize variable for loop n: 0->SIZE
+    int n = 0;
+
+    // Define vectors that will be used to store the variables from the .data file while reading
+    std::vector<int> RGclass(SIZE);
+    std::vector<int> RGmemberIndex(SIZE);
+    std::vector<int> reaclibClass(SIZE);
+    std::vector<int> NumReactingSpecies(SIZE);
+    std::vector<int> NumProducts(SIZE);
+    std::vector<int> isEC(SIZE);
+    std::vector<int> isReverseR(SIZE);
+    std::vector<float> Prefac(SIZE);
+    std::vector<float> Q(SIZE);
+    std::vector<std::vector<int>> reactantZ(SIZE, std::vector<int>(4));
+    std::vector<std::vector<int>> reactantN(SIZE, std::vector<int>(4));
+    std::vector<std::vector<int>> productZ(SIZE, std::vector<int>(4));
+    std::vector<std::vector<int>> productN(SIZE, std::vector<int>(4));
+    std::vector<std::vector<int>> ReactantIndex(SIZE, std::vector<int>(4));
+    std::vector<std::vector<int>> ProductIndex(SIZE, std::vector<int>(4));
+    std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
+
+    std::vector<std::string> reactionType(SIZE);
+    std::vector<int> BetaDecays;
+
+    // Open file for reading
+    std::ifstream fr(filename);
+    if (!fr.is_open()) {
+        std::cerr << "Error opening file." << std::endl;
+        return;
+    }
+
+    // First while loop to loop through all the reactions: Starts @ n=0 and goes to n = SIZE
+    while (n < SIZE) {
+        int subindex = 0;
+
+        // Lines 1-2 have a set number of input values to be read in
+        //char reactionType[20];
+        fr >> reactionType[n];
+        //std::cout << reactionType[n] << std::endl;
+
+        double reactionValues[10];
+        for (int i = 0; i < 10; ++i)
+            fr >> reactionValues[i];
+        //std::cout << "Reaction values: ";
+
+        //for (int i = 0; i < 10; ++i)
+        //    std::cout << reactionValues[i] << " ";
+        //    std::cout << std::endl;
+
+
+        float reactionParams[7];
+        for (int i = 0; i < 7; ++i)
+            fr >> reactionParams[i];
+            //std::cout << "Reaction parameters: ";
+
+        //for (int i = 0; i < 7; ++i)
+        //    std::cout << reactionParams[i] << " ";
+        //    std::cout << std::endl;
+
+        int numR = reactionValues[3];
+        int numP = reactionValues[4];
+        std::vector<int> ZreacNum(numR);
+        std::vector<int> NreacNum(numR);
+        std::vector<int> ZprodNum(numP);
+        std::vector<int> NprodNum(numP);
+        std::vector<int> reacVec(numR);
+        std::vector<int> prodVec(numP);
+
+        // Reacting Proton Number
+        for (int i = 0; i < reactionValues[3]; ++i){
+            fr >> ZreacNum[i];
+        //    printf("i = %d\n",i);
+        //    printf("Z-reac = %d\n",ZreacNum[i]);
+        }
+
+        // Reacting Neutron Number
+        for (int i = 0; i < reactionValues[3]; ++i){
+            fr >> NreacNum[i];
+
+        //    printf("i = %d\n",i);
+        //    printf("N-reac = %d\n",NreacNum[i]);
+        }
+
+        // Product Proton Number
+        for (int i = 0; i < reactionValues[4]; ++i){
+            fr >> ZprodNum[i];
+
+        //    printf("i = %d\n",i);
+        //    printf("Z-prod = %d\n",ZprodNum[i]);
+        }
+
+        // Product Neutron Number
+        for (int i = 0; i < reactionValues[4]; ++i){
+            fr >> NprodNum[i];
+
+        //    printf("i = %d\n",i);
+        //    printf("N-prod = %d\n",NprodNum[i]);
+        }
+
+        // 7th line (reactant species-vector index )
+        for (int i = 0; i < reactionValues[3]; ++i){
+            fr >> reacVec[i];
+
+        //    printf("i = %d\n",i);
+        //    printf("reactant Vector = %d\n",reacVec[i]);           
+        }
+       
+        // 8th line (product species-vector index)
+        for (int i = 0; i < reactionValues[4]; ++i){
+            fr >> prodVec[i];
+
+        //    printf("i = %d\n",i);
+        //    printf("product Vector = %d\n",prodVec[i]);           
+        }
+
+        n++;
+
+    } // END WHILE N < SIZE
+
+// DETECT BETA DECAYS BY LOOKING FOR "e++" or "e+nubar" which are only in the Beta +/- decays respectively.
+    std::string sequencePlus = "e++nu";
+    std::string sequenceMinus = "e+nubar";
+    std::string sequenceEC = "+e-";        
+
+    for(int i =0; i < SIZE; i++){
+        std::string rxn = reactionType[i];
+
+
+        if (detectBetaPlus(rxn, sequencePlus)) {
+            std::cout << "Beta decay \"" << sequencePlus << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (PLUS) " << std::endl;
+        } 
+        if (detectBetaMinus(rxn, sequenceMinus)) {
+            std::cout << "Beta decay \"" << sequenceMinus << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (MINUS) " << std::endl;
+        }
+        if (detectElectronCapture(rxn, sequenceEC)) {
+            std::cout << "Beta decay \"" << sequenceEC << "\" detected in reaction: " << reactionType[i] << " --- Index # : " << i << " (e- cap.) " << std::endl;
+        }  
+      //else {
+      //    std::cout << "The sequence \"" << sequencePlus << " or " << sequenceMinus << "\" is not present in the line " << i << std::endl;
+      //}
+    }
