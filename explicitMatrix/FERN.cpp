@@ -175,8 +175,8 @@ void indexCNOCycle(void);
 //  of isotopes in each network.  These sizes are hardwired for now but eventually we may want 
 //  to read them in and assign them dynamically.
 
-#define ISOTOPES 16                  // Max isotopes in network (e.g. 16 for alpha network)
-#define SIZE 48                      // Max number of reactions (e.g. 48 for alpha network)
+#define ISOTOPES 134                  // Max isotopes in network (e.g. 16 for alpha network)
+#define SIZE 1566                      // Max number of reactions (e.g. 48 for alpha network)
 
 #define plotSteps 200                 // Number of plot output steps
 #define LABELSIZE 35                  // Max size of reaction string a+b>c in characters
@@ -201,13 +201,13 @@ FILE* pfnet;
 // output by the Java code through the stream toCUDAnet has the expected format 
 // for this file. Standard filenames for test cases are listed in table above.
 
-char networkFile[] = "data/network_alpha.inp";
+char networkFile[] = "data/network_nova134.inp";
 
 // Filename for input rates library data. The file rateLibrary.data output by 
 // the Java code through the stream toRateData has the expected format for this 
 // file.  Standard filenames for test cases are listed in table above.
 
-char rateLibraryFile[] = "data/rateLibrary_alpha.data";
+char rateLibraryFile[] = "data/rateLibrary_nova134.data";
 
 //			BETA DECAY DETECTION 
 // Keeep rate file to incorporate all reactions (i.e. 365 largest size network)
@@ -226,7 +226,7 @@ bool detectBetaDecays = false;
 // in which case the file to be read in is specified by the character variable 
 // hydroFile[].
 
-bool hydroProfile =false; 
+bool hydroProfile =true; 
 
 // Filename for input file containing a hydro profile in temperature
 // and density that is used if hydroProfile = true. Sample hydro profile 
@@ -271,7 +271,7 @@ FILE* plotfile5;
 // or showDetails2 true may generate large output files (MB to GB for large networks).
 
 bool showAddRemove = true;   // Show addition/removal of RG from equilibrium
-bool showDetails = false;    // Controls diagnostics to pFileD -> gnu_out/diagnostics.data
+bool showDetails = true;    // Controls diagnostics to pFileD -> gnu_out/diagnostics.data
 bool showDetails2 = false;   // Controls diagnostics to pfnet -> gnu_out/network.data
 
 // Control which explicit algebraic approximations are used. Eventually
@@ -285,7 +285,7 @@ bool showDetails2 = false;   // Controls diagnostics to pfnet -> gnu_out/network
 
 bool doASY = true;            // Whether to use asymptotic approximation
 bool doQSS = !doASY;          // Whether to use QSS approximation 
-bool doPE = true;             // Implement partial equilibrium also
+bool doPE = false;             // Implement partial equilibrium also
 bool showPE = !doPE;          // Show RG that would be in equil if doPE=false
 
 string intMethod = "";        // String holding integration method
@@ -387,7 +387,7 @@ double rho_start = 1e8;        // Initial density in g/cm^3
 double start_time = 1e-20;             // Start time for integration
 double logStart = log10(start_time);   // Base 10 log start time
 double startplot_time =  1e-7;         // Start time for plot output
-double stop_time = 1e-2;                // Stop time for integration
+double stop_time = 1e7;                // Stop time for integration
 double logStop = log10(stop_time);     // Base-10 log stop time5
 double dt_start = 0.01*start_time;     // Initial value of integration dt
 double dt_saved;                       // Full timestep used for this int step
@@ -636,7 +636,7 @@ int* tempInt2;
     std::vector<int> IsotopeIndex(ISOTOPES);
     std::vector<std::string> isotopeLabel(ISOTOPES);
     std::vector<float> P0(SIZE), P1(SIZE), P2(SIZE), P3(SIZE), P4(SIZE), P5(SIZE), P6(SIZE);
-
+    std::vector<int> RGSingle;
 
     //Reaction Reactant Strings
     std::string reacIsoP, reacIsoP1, reacIsoP2;
@@ -6778,21 +6778,39 @@ void assignRG(){
     
     // Summary of reaction groups
     
-    for(int i=0; i<numberRG; i++){
+   for(int i=0; i<numberRG; i++){
         
         if(showDetails) fprintf(pFileD,"\n\nSummary: RG=%d", RG[i].getRGn());
         int numr = RG[i].getnumberMemberReactions();
         
+
+
         for(int j=0; j<numr; j++){
             
             int reacID = RG[i].getmemberReactions(j);
-            if(showDetails) fprintf(pFileD,
+
+            if(showDetails){ 
+            	fprintf(pFileD,
                 "\n%d %s iso[0]=%s iso[1]=%s iso[2]=%s iso[3]=%s",
                 j,reacLabel[reacID],RG[i].getisolabel(0),
                 RG[i].getisolabel(1),RG[i].getisolabel(2),
                 RG[i].getisolabel(3)
             );
+            	if(numr %2 !=0){
+
+            			fprintf(pFileD,"  Odd number of Rxns and RG number = %d",i);
+
+            			RGSingle.push_back(i);
+            			
+//						FOR I:RGSINGLE -> print RGSINGLE s
+            			//fprintf(pFileD,"Single reaction RGs %d",RGSingle);
+            	}
+        	}
         }
+    }
+
+    for(int k=0; k < SIZE; k++){
+    	if(showDetails) fprintf(pFileD," reaction: %s isReverse? %d \n", reacLabel[k], reaction[k].getisReverse());
     }
     
     // Check that this function has assigned isotope indices in each
